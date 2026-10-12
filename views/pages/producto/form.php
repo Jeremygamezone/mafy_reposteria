@@ -28,9 +28,17 @@
               <input required class="form-control" type="text" name="nombre" placeholder="¿Cómo se llama?">
             </div>
 
+             <div class="mb-3">
+              <label class="form-label">Precio</label>
+              <input required class="form-control" type="number" name="precio" placeholder="¿Cuánto cuesta?" step="0.01" min="0">
+            </div>
             <div class="mb-3">
               <label class="form-label">Descripción</label>
               <input required class="form-control" type="text" name="descripcion" placeholder="¡Describe qué tan rico sabe!">
+            </div>
+
+            <div class="mb-3">
+              <input required class="form-control" type="hidden" name="estatus" value="A la venta">
             </div>
 
             <div class="tile-footer">

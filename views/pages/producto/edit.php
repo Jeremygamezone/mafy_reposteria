@@ -37,8 +37,21 @@
             </div>
 
             <div class="mb-3">
+              <label class="form-label">Precio</label>
+              <input required class="form-control" type="number" name="precio" placeholder="¿Cuánto cuesta?" step="0.01" min="0" value="<?=$p->get_precio()?>">
+            </div>
+
+            <div class="mb-3">
               <label class="form-label">Descripción</label>
               <input required class="form-control" type="text" name="descripcion" placeholder="¡Describe qué tan rico sabe!" value="<?=$p->get_descripcion()?>">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Disponibilidad</label>
+              <select required class="form-control" name="estatus">
+                <option value="A la venta" <?= $p->get_estatus() === 'A la venta' ? 'selected' : '' ?>>A la venta</option>
+                <option value="No disponible" <?= $p->get_estatus() === 'No disponible' ? 'selected' : '' ?>>No disponible</option>
+              </select>
             </div>
 
             <div class="tile-footer">

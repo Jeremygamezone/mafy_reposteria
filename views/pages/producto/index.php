@@ -26,7 +26,9 @@
                     <tr>
                       <th>ID de producto</th>
                       <th>Postre</th>
+                      <th>Precio</th>
                       <th>Descripción</th>
+                      <th>Estatus</th>
                       <th>Accion</th>
                     </tr>
                   </thead>
@@ -35,7 +37,9 @@
                     <tr>
                       <td><?=$r->id?></td>
                       <td><?=$r->nombre?></td>
+                      <td><?=$r->precio?></td>
                       <td><?=$r->descripcion?></td>
+                      <td><?=$r->estatus?></td>
                       <td><a href="?c=producto&a=FormEditar&id=<?=$r->id?>" class="btn btn-flat btn-warning">Editar</a></td>
                     </tr>
                     <?php endforeach;?>

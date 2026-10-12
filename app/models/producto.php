@@ -6,6 +6,8 @@ class Producto{
     private $id;
     private $nombre;
     private $descripcion;
+    private $precio;
+    private $estatus;
 
     public function __CONSTRUCT(){
         $this->pdo = DataBase::Connect();
@@ -35,6 +37,22 @@ class Producto{
         $this->descripcion = $descripcion;
     }
 
+    public function get_precio():float{
+        return $this->precio;
+    }
+
+    public function set_precio(float $precio){
+        $this->precio = $precio;
+    }
+
+    public function get_estatus():string{
+        return $this->estatus;
+    }
+
+    public function set_estatus(string $estatus){
+        $this->estatus = $estatus;
+    }
+
     public function Listar(){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM productos");
@@ -45,10 +63,20 @@ class Producto{
         }
     }
 
+    public function Disponibles(){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM productos WHERE estatus = 'A la venta'");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
     public function Insertar(Producto $p){
         try{
-            $consulta="INSERT INTO productos(nombre, descripcion) VALUES (?,?)";
-            $this->pdo->prepare($consulta)->execute(array($p->get_nombre(),$p->get_descripcion()));
+            $consulta="INSERT INTO productos(nombre, descripcion, precio, estatus) VALUES (?,?,?,?)";
+            $this->pdo->prepare($consulta)->execute(array($p->get_nombre(),$p->get_descripcion(),$p->get_precio(),$p->get_estatus()));
 
         }catch(Exception $e){
             die($e->getMessage());
@@ -65,7 +93,8 @@ class Producto{
             $p->set_id((int) $r->id);
             $p->set_nombre($r->nombre);
             $p->set_descripcion($r->descripcion);
-
+            $p->set_precio((float) $r->precio);
+            $p->set_estatus((int) $r->estatus);
             return $p;
         }catch(Exception $e){
             die($e->getMessage());
@@ -76,12 +105,14 @@ class Producto{
     public function Actualizar(Producto $p){
         try {
             $consulta = "UPDATE productos
-                        SET nombre = ?, descripcion = ?
+                        SET nombre = ?, descripcion = ?, precio = ?, estatus = ?
                         WHERE id = ?";
 
             $this->pdo->prepare($consulta)->execute([
                 $p->get_nombre(),
                 $p->get_descripcion(),
+                $p->get_precio(),
+                $p->get_estatus(),
                 $p->get_id()
             ]);
 

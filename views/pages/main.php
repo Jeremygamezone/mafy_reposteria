@@ -20,14 +20,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <div class="tile">
-            <h3 class="tile-title">PUTO</h3>
+             <h1>Productos Disponibles</h1><br>
               <div id="salesChart">
-                <h1>Hola</h1>
-                <p><?php $p=$this->model->Listar()?>
-                <?=var_dump($p)?>
-            </p>
+                <?php $d=$this->model->Disponibles()?>
+                <h2><?php foreach($d as $producto): ?>
+                    <p><?= $producto->nombre ?> - $<?= number_format($producto->precio, 2) ?></p>
+                <?php endforeach; ?></h2>
               </div>
           </div>
         </div>

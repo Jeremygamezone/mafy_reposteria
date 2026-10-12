@@ -37,15 +37,16 @@ class ProductoControlador{
         $p = new Producto();
         $p->set_nombre($_POST['nombre']);
         $p->set_descripcion($_POST['descripcion']);
+        $p->set_precio($_POST['precio']);
+        $p->set_estatus($_POST['estatus']);
 
         $this->model->Insertar($p);
         header("location:?c=producto");
     }
 
     public function Editar(){
-    // Verificar que los datos necesarios fueron enviados
     if (
-        !isset($_POST['id'], $_POST['nombre'], $_POST['descripcion']) ||
+        !isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['estatus']) ||
         !is_numeric($_POST['id'])
     ) {
         die('Faltan datos para editar el producto.');
@@ -56,6 +57,8 @@ class ProductoControlador{
     $p->set_id((int) $_POST['id']);
     $p->set_nombre($_POST['nombre']);
     $p->set_descripcion($_POST['descripcion']);
+    $p->set_precio($_POST['precio']);
+    $p->set_estatus($_POST['estatus']);
 
     $this->model->Actualizar($p);
 
