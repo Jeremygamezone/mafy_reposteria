@@ -50,7 +50,7 @@
               <label class="form-label">Disponibilidad</label>
               <select required class="form-control" name="estatus">
                 <option value="A la venta" <?= $p->get_estatus() === 'A la venta' ? 'selected' : '' ?>>A la venta</option>
-                <option value="No disponible" <?= $p->get_estatus() === 'No disponible' ? 'selected' : '' ?>>No disponible</option>
+                <option value="Agotado" <?= $p->get_estatus() === 'Agotado' ? 'selected' : '' ?>>Agotado</option>
               </select>
             </div>
 
