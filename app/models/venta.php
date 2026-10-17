@@ -73,5 +73,30 @@ class Venta{
             die($e->getMessage());
         }
     }
+
+    public function Prueba(){
+            try {
+                $consulta = $this->pdo->prepare("
+                    SELECT
+                        Ventas.id AS venta_id,
+                        Productos.nombre AS producto,
+                        Detalles.cantidad AS cantidad,
+                        Ventas.fecha AS fecha
+                    FROM Detalles
+                    INNER JOIN Ventas
+                        ON Detalles.Venta_id = Ventas.ID
+                    INNER JOIN Productos
+                        ON Detalles.Producto_id = Productos.ID
+                    WHERE Ventas.ID = 1
+                ");
+
+                $consulta->execute();
+
+                return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
 }
 ?>

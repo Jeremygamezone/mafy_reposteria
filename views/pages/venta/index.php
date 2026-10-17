@@ -28,18 +28,19 @@
                   <thead>
                       <tr>
                           <th># Venta</th>
-                          <th>Detalles</th>
-                          <th>Precio Unitario</th>
+                          <th>Producto</th>
+                          <th>Precio Unitario</th>  
                       </tr>
                   </thead>
                   <tbody>
-                          <?php foreach ($this->detalleModel->ConsultarPorVenta() as $item): ?>
-                              <tr>
-                                  <td><?= $item->numero ?></td>
-                                  <td><?= $item->cantidad ?></td>
-                                  <td><?= $item->precio ?></td>
-                              </tr>
-                          <?php endforeach; ?>
+                    <?php foreach ($this->model->Prueba() as $detalle): ?>
+                          <tr>
+                            <td><?= $detalle->venta_id ?></td>
+                            <td><?= $detalle->producto ?></td>
+                            <td><?= $detalle->cantidad ?></td>
+                            <td><?= $detalle->fecha ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                   </tbody>
               </table>
               </div>
@@ -48,7 +49,7 @@
           <div class="tile">
             <h1><a href="?c=producto&a=FormCrear" class="btn btn-primary btn-flat">Nueva Venta</a></h1>
             <div class="tile-body">
-              <div class="table-responsive">
+              <!-- <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
@@ -93,7 +94,7 @@
                   <?php endforeach; ?>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
