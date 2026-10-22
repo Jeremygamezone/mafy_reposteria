@@ -49,84 +49,6 @@
             </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="tile">
-            <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                      <tr>
-                          <th># Venta</th>
-                          <th>Detalles</th>
-                          <th>Precio Unitario</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                          <?php foreach ($this->detalle->ConsultarPorVenta() as $item): ?>
-                              <tr>
-                                  <td><?= $item->numero ?></td>
-                                  <td><?= $item->cantidad ?></td>
-                                  <td><?= $item->precio ?></td>
-                              </tr>
-                          <?php endforeach; ?>
-                  </tbody>
-              </table>
-              </div>
-            </div>
-          </div>
-          <div class="tile">
-            <h1><a href="?c=producto&a=FormCrear" class="btn btn-primary btn-flat">Nueva Venta</a></h1>
-            <div class="tile-body">
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead>
-                    <tr>
-                      <th># Venta</th>
-                      <th>Detalles</th>
-                      <th>Fecha</th>
-                      <th>Cliente</th>
-                      <th>Nota</th>
-                      <th>Accion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($this->model->Listar() as $r): ?>
-                      <tr>
-                          <td><?= $r->id ?></td>
-
-                          <td>
-                              <?php
-                              foreach (
-                                  $this->detalle->ConsultarPorVenta($r->id)
-                                  as $detalle
-                              ):
-                              ?>
-                                  <?= $detalle->cantidad ?> x
-                                  <?= $detalle->producto ?>
-                                  <?= $detalle->precio ?>
-                                  <br>
-                              <?php endforeach; ?>
-                          </td>
-
-                          <td><?= $r->fecha ?></td>
-                          <td><?= $r->cliente ?></td>
-                          <td><?= $r->nota ?></td>
-
-                          <td>
-                              <a href="?c=venta&a=FormEditar&id=<?= $r->id ?>"
-                                class="btn btn-flat btn-warning">
-                                  Editar
-                              </a>
-                          </td>
-                      </tr>
-                  <?php endforeach; ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-    </div>
 
     <div class="row">
         <div class="col-12 mb-4">
@@ -185,7 +107,6 @@
         </div>
     </div>
 
-    <!-- Tercera sección: detalles de venta -->
     <div class="row">
         <div class="col-12">
 
