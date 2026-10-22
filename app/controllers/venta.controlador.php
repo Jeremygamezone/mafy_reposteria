@@ -3,12 +3,12 @@
     require_once '../app/models/detalle.php';
 
     class VentaControlador{
-        private $model;
-        private $detalleModel;
+        private $venta;
+        private $detalle;
 
         public function __CONSTRUCT(){
-            $this->model = new Venta();
-            $this->detalleModel = new Detalle();
+            $this->venta = new Venta();
+            $this->detalle = new Detalle();
         }
 
         public function Inicio(){

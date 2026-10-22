@@ -55,6 +55,7 @@
 
         public function ConsultarPorVenta()
         {
+<<<<<<< Updated upstream
             try{
                 $consulta = $this->pdo->prepare("SELECT venta_id AS numero, d.cantidad, p.nombre AS producto, p.precio, v.fecha AS ventas FROM Detalles d INNER JOIN Productos p INNER JOIN Ventas v ON d.Producto_id = p.ID");
                 $consulta->execute();
@@ -62,6 +63,51 @@
             } catch (Exception $e) {
                 die($e->getMessage());
             }
+=======
+            try {
+                $consulta = $this->pdo->prepare("
+                    SELECT
+                        Ventas.id AS venta_id,
+                        Productos.nombre AS producto,
+                        Detalles.cantidad AS cantidad,
+                        Ventas.fecha AS fecha
+                    FROM Detalles
+                    INNER JOIN Ventas
+                        ON Detalles.Venta_id = Ventas.ID
+                    INNER JOIN Productos
+                        ON Detalles.Producto_id = Productos.ID
+                    WHERE Ventas.ID = ?
+                ");
+
+                $consulta->execute([$id]);
+
+                return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+
+        public function DetallesDeVenta($venta_id)
+        {
+            $consulta = $this->pdo->prepare("
+                SELECT
+                    d.venta_id,
+                    d.producto_id,
+                    p.nombre AS producto,
+                    d.cantidad,
+                    p.precio,
+                    (d.cantidad * p.precio) AS subtotal
+                FROM detalles d
+                INNER JOIN productos p
+                    ON d.producto_id = p.id
+                WHERE d.venta_id = ?
+            ");
+
+            $consulta->execute([$venta_id]);
+
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+>>>>>>> Stashed changes
         }
     }
 ?>

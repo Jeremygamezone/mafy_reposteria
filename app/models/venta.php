@@ -73,5 +73,61 @@ class Venta{
             die($e->getMessage());
         }
     }
+<<<<<<< Updated upstream
+=======
+
+        public function ListarB()
+    {
+        $consulta = $this->pdo->prepare("
+            SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            ORDER BY v.id DESC
+        ");
+
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function DetallesDeVenta(){
+            try {
+                $consulta = $this->pdo->prepare("
+                    SELECT 
+                        v.id AS venta_id,
+                        v.usuario_id,
+                        CONCAT(u.nombre, ' ', u.apellido_paterno) AS nombre_usuario,
+                        v.fecha,
+                        v.cliente,
+                        v.nota,
+                        GROUP_CONCAT(CONCAT(d.cantidad, ' - ', p.nombre, ' ($', p.precio, ')') SEPARATOR '<br>') AS lista_detalles,
+                        SUM(d.cantidad * p.precio) AS total_venta
+                    FROM ventas v
+                    INNER JOIN usuarios u ON v.usuario_id = u.id
+                    INNER JOIN detalles d ON v.id = d.venta_id
+                    INNER JOIN productos p ON d.producto_id = p.id
+                    GROUP BY v.id;
+                ");
+
+                $consulta->execute();
+
+                return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+>>>>>>> Stashed changes
 }
 ?>

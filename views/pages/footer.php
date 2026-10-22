@@ -1,4 +1,4 @@
-<<footer>
+<footer>
 	<h1>
 		PUTO
 	</h1>
