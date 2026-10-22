@@ -55,7 +55,6 @@
 
         public function ConsultarPorVenta()
         {
-<<<<<<< Updated upstream
             try{
                 $consulta = $this->pdo->prepare("SELECT venta_id AS numero, d.cantidad, p.nombre AS producto, p.precio, v.fecha AS ventas FROM Detalles d INNER JOIN Productos p INNER JOIN Ventas v ON d.Producto_id = p.ID");
                 $consulta->execute();
@@ -63,7 +62,6 @@
             } catch (Exception $e) {
                 die($e->getMessage());
             }
-=======
             try {
                 $consulta = $this->pdo->prepare("
                     SELECT
@@ -107,7 +105,6 @@
             $consulta->execute([$venta_id]);
 
             return $consulta->fetchAll(PDO::FETCH_OBJ);
->>>>>>> Stashed changes
         }
     }
 ?>

@@ -73,8 +73,6 @@ class Venta{
             die($e->getMessage());
         }
     }
-<<<<<<< Updated upstream
-=======
 
         public function ListarB()
     {
@@ -128,6 +126,5 @@ class Venta{
                 die($e->getMessage());
             }
         }
->>>>>>> Stashed changes
 }
 ?>
