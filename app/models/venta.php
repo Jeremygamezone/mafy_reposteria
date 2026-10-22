@@ -115,8 +115,7 @@ class Venta{
                     INNER JOIN usuarios u ON v.usuario_id = u.id
                     INNER JOIN detalles d ON v.id = d.venta_id
                     INNER JOIN productos p ON d.producto_id = p.id
-                    GROUP BY v.id;
-                ");
+                    GROUP BY v.id;");
 
                 $consulta->execute();
 

@@ -53,13 +53,29 @@
             }
         }
 
-        public function ConsultarPorVenta()
+        
+        public function ConsultarPorVenta($id)
         {
-            try{
-                $consulta = $this->pdo->prepare("SELECT venta_id AS numero, d.cantidad, p.nombre AS producto, p.precio, v.fecha AS ventas FROM Detalles d INNER JOIN Productos p INNER JOIN Ventas v ON d.Producto_id = p.ID");
-                $consulta->execute();
+            try {
+                $consulta = $this->pdo->prepare("
+                    SELECT
+                        Ventas.id AS venta_id,
+                        Productos.nombre AS producto,
+                        Detalles.cantidad AS cantidad,
+                        Ventas.fecha AS fecha
+                    FROM Detalles
+                    INNER JOIN Ventas
+                        ON Detalles.Venta_id = Ventas.ID
+                    INNER JOIN Productos
+                        ON Detalles.Producto_id = Productos.ID
+                    WHERE Ventas.ID = ?
+                ");
+
+                $consulta->execute([$id]);
+
                 return $consulta->fetchAll(PDO::FETCH_OBJ);
-            } catch (Exception $e) {
+
+            } catch (PDOException $e) {
                 die($e->getMessage());
             }
             try {
@@ -106,5 +122,31 @@
 
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }
+
+        public function Prueba(){
+            try {
+                $consulta = $this->pdo->prepare("
+                    SELECT
+                        Ventas.id AS venta_id,
+                        Productos.nombre AS producto,
+                        Detalles.cantidad AS cantidad,
+                        Ventas.fecha AS fecha
+                    FROM Detalles
+                    INNER JOIN Ventas
+                        ON Detalles.Venta_id = Ventas.ID
+                    INNER JOIN Productos
+                        ON Detalles.Producto_id = Productos.ID
+                    WHERE Ventas.ID = 1
+                ");
+
+                $consulta->execute();
+
+                return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        }
+
     }
 ?>
