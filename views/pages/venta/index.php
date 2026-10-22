@@ -48,7 +48,6 @@
 
             </div>
         </div>
-<<<<<<< Updated upstream
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -64,7 +63,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                          <?php foreach ($this->detalleModel->ConsultarPorVenta() as $item): ?>
+                          <?php foreach ($this->detalle->ConsultarPorVenta() as $item): ?>
                               <tr>
                                   <td><?= $item->numero ?></td>
                                   <td><?= $item->cantidad ?></td>
@@ -99,7 +98,7 @@
                           <td>
                               <?php
                               foreach (
-                                  $this->detalleModel->ConsultarPorVenta($r->id)
+                                  $this->detalle->ConsultarPorVenta($r->id)
                                   as $detalle
                               ):
                               ?>
@@ -127,7 +126,6 @@
               </div>
             </div>
           </div>
-=======
     </div>
 
     <div class="row">
@@ -184,7 +182,6 @@
                     <?php endforeach; ?>
 
                 </div>
->>>>>>> Stashed changes
         </div>
     </div>
 
