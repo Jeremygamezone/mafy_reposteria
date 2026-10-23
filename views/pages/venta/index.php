@@ -1,5 +1,10 @@
 <?php
+    require_once 'descuento.php';
+
     $costoVenta = 0;
+    
+                                         $descuento = new Descuento();
+
 ?>
 <main class="text-light bg-dark" style="background-color: var(--bs-wine--dark) !important;">
     <div clas="bg-dark">
@@ -137,7 +142,13 @@
                                         <?php endforeach; ?>
 
                                         <hr>
-
+                                        <?php
+                                         
+                                         foreach ($this->detalle->DetallesDeVenta($venta->venta_id) as $detalle): {
+                                             
+                                             $descuento = new Descuento();
+                                         }
+                                         endforeach;?>
                                         <div class="text-end">
                                             <h4><strong>
                                                 Total $<?= number_format($total, 2) ?>

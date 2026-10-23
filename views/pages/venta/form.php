@@ -1,44 +1,27 @@
 <body class="app sidebar-mini">
-     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Image">
-        <div>
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
-        </div>
-      </div>
-      <ul class="app-menu">
-        <a class="app-menu__item" href="?c=producto" data-toggle="treeview"><i class="app-menu__icon bi bi-laptop"></i><span class="app-menu__label">Postres</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
-      </ul>
-    </aside>
     <main class="app-content">
   <div class="app-title">
     <div>
-      <h1><i class="bi bi-ui-checks"></i>Postres</h1>
+      <h1><i class="bi bi-ui-checks"></i>¡Nueva Venta!</h1>
     </div>
   </div>
   <div class="row flow">
     <div class="col-md-6">
       <div class="tile">
-        <h3 class="tile-title">Nuevo Postre</h3>
+        <h3 class="tile-title">Venta</h3>
         <div class="tile-body">
-          <form method="POST" action="?c=producto&a=guardar">
-            
-            <div class="mb-3">
-              <label class="form-label">Nombre del postre</label>
-              <input required class="form-control" type="text" name="nombre" placeholder="¿Cómo se llama?">
-            </div>
-
+          <form method="POST" action="?c=venta&a=guardar">
              <div class="mb-3">
-              <label class="form-label">Precio</label>
-              <input required class="form-control" type="number" name="precio" placeholder="¿Cuánto cuesta?" step="0.01" min="0">
+              <label class="form-label">Fecha</label>
+              <input type="text" id="fecha" name="fecha" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Descripción</label>
-              <input required class="form-control" type="text" name="descripcion" placeholder="¡Describe qué tan rico sabe!">
+              <label class="form-label">Cliente</label>
+              <input required class="form-control" type="text" name="cliente" placeholder="¿Para quién es?">
             </div>
-
             <div class="mb-3">
-              <input required class="form-control" type="hidden" name="estatus" value="A la venta">
+              <label class="form-label">Nota</label>
+              <textarea required class="form-control" name="nota" placeholder="Deja un comentario..."></textarea>
             </div>
 
             <div class="tile-footer">
@@ -46,7 +29,7 @@
                 <i class="bi bi-check-circle-fill me-2"></i>Registrar
               </button>&nbsp;&nbsp;&nbsp;
               <a class="btn btn-secondary" href="?c=producto">
-                <i class="bi bi-x-circle-fill me-2"></i>Cancelar
+                <i class="bi bi-x-circle-fill me-2"></i>Cancelar venta
               </a>
             </div>
 
@@ -56,4 +39,20 @@
     </div>
   </div>
 </main>
-  </body>
+</body>
+<script>
+    function actualizarFecha() {
+        const ahora = new Date();
+
+        const formato = ahora.getFullYear() + '-' +
+            String(ahora.getMonth() + 1).padStart(2, '0') + '-' +
+            String(ahora.getDate()).padStart(2, '0') + ' ' +
+            String(ahora.getHours()).padStart(2, '0') + ':' +
+            String(ahora.getMinutes()).padStart(2, '0') + ':' +
+            String(ahora.getSeconds()).padStart(2, '0');
+
+        document.getElementById('fecha').value = formato;
+    }
+
+    actualizarFecha();
+</script>

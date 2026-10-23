@@ -98,5 +98,15 @@ class Venta{
 
         return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
+    
+    public function Insertar(Venta $v){
+        try{
+            $consulta="INSERT INTO ventas(usuario_id, fecha, cliente, nota) VALUES (1,?,?,?)";
+            $this->pdo->prepare($consulta)->execute(array($v->get_fecha(),$v->get_cliente(),$v->get_nota()));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
 }
 ?>
