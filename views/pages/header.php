@@ -57,13 +57,12 @@
 
 main {
     padding: 20px;
-    background-color: #FFF9FC;
     color: #38232D;
 }
 
 /* Fondo general */
 body {
-    background-color: #FFF9FC;
+    background-color: #340005;
     color: #38232D;
 }
 
@@ -215,12 +214,26 @@ body {
     color: var(--bs-wine--dark) !important;
 }
 
+.bg-pink{
+    background-color: var(--bs-pink-light) !important;
+    color: white;
+}
+
+.bg-pink-dark{
+    background-color: var(--bs-pink-dark) !important;
+    color: white;
+}
+
 .text{
   color: var(--bs-yellow-light) !important;
 }
 
-.text-light{
+.text-yellow-light{
   color: var(--bs-yellow-light) !important;
+}
+
+.text-light{
+  color: var(--bs-pink-light) !important;
 }
 
 .text-dark{

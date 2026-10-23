@@ -29,7 +29,7 @@
                       <td>$ <?=$r->precio?></td>
                       <td><?=$r->descripcion?></td>
                       <td><?=$r->estatus?></td>
-                      <td><a href="?c=producto&a=FormEditar&id=<?=$r->id?>" class="btn btn-flat btn-warning">Editar</a></td>
+                      <td><a href="?c=producto&a=FormEditar&id=<?=$r->id?>" class="btn btn-flat bg-pink-dark">Editar</a></td>
                     </tr>
                     <?php endforeach;?>
                   </tbody>
