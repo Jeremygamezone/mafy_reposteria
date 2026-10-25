@@ -1,5 +1,5 @@
-<body class="app sidebar-mini">
-    <main class="app-content">
+<body class="">
+    <main class="">
   <div class="app-title">
     <div>
       <h1><i class="bi bi-ui-checks"></i>Postres</h1>

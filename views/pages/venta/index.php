@@ -10,10 +10,7 @@
     <div clas="bg-dark">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
             <h1><i class="bi bi-table"></i> Ventas</h1>
-            <a href="?c=venta&a=FormCrear" class="btn btn-primary btn-flat">
-                        <i class="bi bi-plus-circle"></i>
-                        Nueva Venta
-            </a>
+            
         </div>
     </div>
 
@@ -21,7 +18,12 @@
         <div class="col-12">
                 <h2 class="h4 text-yellow-light">Ventas en tabla usando sólo consulta RAW de SQL</h2>
                     <br>
-                <div class="table-responsive rounded">
+                
+        </div>
+    </div>
+    <div class="row g-2">
+            <div class="col-12 col-md-12 col-xl-6 card-custom">
+                          <div class="table-responsive rounded">
                     <table class="table table-hover" id="sampleTable">
                         <thead>
                             <tr>
@@ -44,16 +46,17 @@
                         </tbody>
                     </table>
                 </div>
-        </div>
-    </div>
-    
-                        <div class="col-12 col-md-6 col-xl-4 card-custom">
+                        </div>
+            <div class="col-12 col-md-12 col-xl-6 card-custom">
                             <div class="card shadow bg-body rounded">
                                 <div class="card-header">
-                                        <strong>Puta madre</strong>
+                                       <h1>Pene</h1>
                                     </div>
                                 <div class="card-body">
-
+                                <a href="?c=venta&a=FormCrear" class="btn btn-primary btn-flat">
+                                            <i class="bi bi-plus-circle"></i>
+                                            Nueva Venta
+                                </a>
                                     <p class="mb-3">
                                         <strong>Cliente</strong>
                                         texto de ejemplo
@@ -70,9 +73,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        
+    </div>
 
     <div class="row">
         <div class="col-12 mb-4">
@@ -80,99 +82,93 @@
                     <br>
                 <div class="row g-3">
 
-                    <?php foreach ($this->venta->ListarB() as $venta): ?>
-                        <div class="col-12 col-md-6 col-xl-4 card-custom" id="venta-<?= $venta->venta_id ?>">
+                    
+<?php foreach ($this->venta->ListarB() as $venta): ?>
 
-                            <div class="card shadow bg-body rounded h-100">
-                                <div class="card-header">
-                                        <strong>Venta #<?= $venta->venta_id ?></strong>
-                                    </div>
-                                <div class="card-body">
-                                    <p class="mb-2">
-                                        <strong>Fecha</strong>
-                                        <?= substr($r->fecha,0,10) ?>
-                                            <strong>Hora</strong>
-                                        <?= substr($venta->fecha, 10, 9) ?>
-                                    </p>
+    <div class="col-12 col-md-6 col-xl-4 card-custom"
+         id="venta-<?= $venta->venta_id ?>">
 
-                                    <p class="mb-3">
-                                        <strong>Cliente</strong>
-                                        <?= $venta->cliente ?>
-                                    </p><hr>
+        <div class="card shadow bg-body rounded h-100">
+            <div class="card-header">
+                <strong>Venta #<?= $venta->venta_id ?></strong>
+            </div>
 
-                                    <div class="mb-3">
-                                        <h5>Se vendieron</h5>
+            <div class="card-body">
 
-                                        <?php
-                                        $detalles = $this->detalle->DetallesDeVenta($venta->venta_id);
+                <p>
+                    <strong>Fecha:</strong>
+                    <?= htmlspecialchars($venta->fecha) ?>
+                </p>
 
-                                        $total = 0;
-                                        ?>
-                                                <div class="d-flex justify-content-between">
-                                                <span>
-                                                    <h6>Postre</h6>
-                                                </span>
-                                                <span>
-                                                    <h6>Precio unitario</h6>
-                                                </span>
-                                                <span>
-                                                    <h6>Subtotal</h6>
-                                                </span>
-                                            </div>
-                                        <?php foreach ($detalles as $d): ?>
+                <p>
+                    <strong>Cliente:</strong>
+                    <?= htmlspecialchars($venta->cliente ?? '') ?>
+                </p>
 
-                                            <?php
-                                            $subtotal = $d->cantidad * $d->precio;
-                                            $total += $subtotal;
-                                            ?>
-                                            
-                                            <div class="d-flex justify-content-between">
-                                                <span>
-                                                    <?= (int) $d->cantidad ?> ×
-                                                    <?= htmlspecialchars($d->producto) ?>
-                                                </span>
-                                                <span>
-                                                        $<?= number_format($d->precio, 2) ?>
-                                                </span>
-                                                <span>
-                                                    $<?= number_format($subtotal, 2) ?>
-                                                </span>
-                                            </div>
+                <hr>
 
-                                        <?php endforeach; ?>
+                <?php
+                // Consultamos los detalles una sola vez.
+                $detalles = $this->detalle->DetallesDeVenta(
+                    $venta->venta_id
+                );
 
-                                        <hr>
-                                        <?php
-                                         
-                                         foreach ($this->detalle->DetallesDeVenta($venta->venta_id) as $detalle): {
-                                             
-                                             $descuento = new Descuento();
-                                         }
-                                         endforeach;?>
-                                        <div class="text-end">
-                                            <h4><strong>
-                                                Total $<?= number_format($total, 2) ?>
-                                            </strong></h4>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                   <hr>
+                $total = 0;
+                ?>
 
-                                    <div>
-                                        <strong>Nota</strong>
-                                        <p class="mb-0 text-break">
-                                            <?= $venta->nota ?>
-                                        </p>
-                                    </div>
+                <?php if (!empty($detalles)): ?>
 
-                                </div>
+                    <h5>Se vendieron</h5>
 
-                            </div>
+                    <?php foreach ($detalles as $d): ?>
 
+                        <?php
+                        $subtotal = $d->cantidad * $d->precio;
+                        $total += $subtotal;
+                        ?>
+
+                        <div class="d-flex justify-content-between gap-2">
+                            <span>
+                                <?= (int) $d->cantidad ?> ×
+                                <?= htmlspecialchars($d->producto) ?>
+                            </span>
+
+                            <span>
+                                $<?= number_format($subtotal, 2) ?>
+                            </span>
                         </div>
 
                     <?php endforeach; ?>
+
+                    <hr>
+
+                    <h4 class="text-end">
+                        Total: $<?= number_format($total, 2) ?>
+                    </h4>
+
+                <?php else: ?>
+
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>
+                        Esta venta aún no tiene productos registrados.
+                    </div>
+
+                <?php endif; ?>
+
+                <hr>
+
+                <div>
+                    <strong>Nota</strong>
+                    <p class="mb-0 text-break">
+                        <?= htmlspecialchars($venta->nota ?? '') ?>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<?php endforeach; ?>
 
                 </div>
         </div>

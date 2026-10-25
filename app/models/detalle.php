@@ -2,21 +2,12 @@
     class Detalle{
         private $pdo;
 
-        private $id;
         private $venta_id;
         private $producto_id;
         private $cantidad;
 
         public function __CONSTRUCT(){
             $this->pdo = DataBase::Connect();
-        }
-
-        public function get_id():int{
-            return $this->id;
-        }
-
-        public function set_id(int $id){
-            $this->id = $id;
         }
 
         public function get_venta_id():int{
@@ -54,54 +45,6 @@
         }
 
         
-        public function ConsultarPorVenta($id)
-        {
-            try {
-                $consulta = $this->pdo->prepare("
-                    SELECT
-                        Ventas.id AS venta_id,
-                        Productos.nombre AS producto,
-                        Detalles.cantidad AS cantidad,
-                        Ventas.fecha AS fecha
-                    FROM Detalles
-                    INNER JOIN Ventas
-                        ON Detalles.Venta_id = Ventas.ID
-                    INNER JOIN Productos
-                        ON Detalles.Producto_id = Productos.ID
-                    WHERE Ventas.ID = ?
-                ");
-
-                $consulta->execute([$id]);
-
-                return $consulta->fetchAll(PDO::FETCH_OBJ);
-
-            } catch (PDOException $e) {
-                die($e->getMessage());
-            }
-            try {
-                $consulta = $this->pdo->prepare("
-                    SELECT
-                        Ventas.id AS venta_id,
-                        Productos.nombre AS producto,
-                        Detalles.cantidad AS cantidad,
-                        Ventas.fecha AS fecha
-                    FROM Detalles
-                    INNER JOIN Ventas
-                        ON Detalles.Venta_id = Ventas.ID
-                    INNER JOIN Productos
-                        ON Detalles.Producto_id = Productos.ID
-                    WHERE Ventas.ID = ?
-                ");
-
-                $consulta->execute([$id]);
-
-                return $consulta->fetchAll(PDO::FETCH_OBJ);
-
-            } catch (PDOException $e) {
-                die($e->getMessage());
-            }
-        }
-
         public function DetallesDeVenta($venta_id)
         {
             $consulta = $this->pdo->prepare("
@@ -123,30 +66,15 @@
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function Prueba(){
-            try {
-                $consulta = $this->pdo->prepare("
-                    SELECT
-                        Ventas.id AS venta_id,
-                        Productos.nombre AS producto,
-                        Detalles.cantidad AS cantidad,
-                        Ventas.fecha AS fecha
-                    FROM Detalles
-                    INNER JOIN Ventas
-                        ON Detalles.Venta_id = Ventas.ID
-                    INNER JOIN Productos
-                        ON Detalles.Producto_id = Productos.ID
-                    WHERE Ventas.ID = 1
-                ");
+        public function Insertar(Detalle $d){
+        try{
+            $consulta="INSERT INTO detalles(venta_id, producto_id, cantidad) VALUES (?,?,?)";
+            $this->pdo->prepare($consulta)->execute(array($d->get_venta_id(),$d->get_producto_id(),$d->get_cantidad()));
 
-                $consulta->execute();
-
-                return $consulta->fetchAll(PDO::FETCH_OBJ);
-
-            } catch (PDOException $e) {
-                die($e->getMessage());
-            }
+        }catch(Exception $e){
+            die($e->getMessage());
         }
+    }
 
     }
 ?>

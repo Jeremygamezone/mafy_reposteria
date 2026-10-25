@@ -30,7 +30,7 @@
             $v->set_nota($_POST['nota']);
 
             $this->venta->Insertar($v);
-            header("location:?c=venta");
+            header("location:?c=detalle&a=FormCrear");
         }
     }
 ?>
