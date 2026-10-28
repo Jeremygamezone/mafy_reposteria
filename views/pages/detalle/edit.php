@@ -1,65 +1,39 @@
-<body class="app sidebar-mini">
-     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Image">
-        <div>
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
-        </div>
-      </div>
-      <ul class="app-menu">
-        <a class="app-menu__item" href="?c=producto" data-toggle="treeview"><i class="app-menu__icon bi bi-laptop"></i><span class="app-menu__label">Postres</span><i class="treeview-indicator bi bi-chevron-right"></i></a>
-      </ul>
-    </aside>
-    <main class="app-content">
+
+<body class="">
+    <main class="">
   <div class="app-title">
     <div>
-      <h1><i class="bi bi-ui-checks"></i>Postres</h1>
+      <h1><i class="bi bi-ui-checks"></i>Pedido <?= $_GET['id'] ?></h1>
     </div>
   </div>
   <div class="row flow">
     <div class="col-md-6">
       <div class="tile">
-        <h3 class="tile-title">Editar <?=$p->get_nombre()?></h3>
         <div class="tile-body">
-          <form method="POST" action="?c=producto&a=editar">
-            <div>
-                <input
-                    type="hidden"
-                    name="id"
-                    value="<?= $p->get_id() ?>"
-                >
+          <form method="POST" action="?c=detalle&a=guardar">
+             <div class="mb-3">
+              <label for="form-label"><h2># de Venta <?= $d->get_id() ?></h2></label>
+              <input type="hidden" id="venta_id" name="venta_id" readonly value="<?= $_GET['id'] ?>">
             </div>
-             
-
             <div class="mb-3">
-              <label class="form-label">Nombre del postre</label>
-              <input required class="form-control" type="text" name="nombre" placeholder="¿Cómo se llama?" value="<?=$p->get_nombre()?>">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Precio</label>
-              <input required class="form-control" type="number" name="precio" placeholder="¿Cuánto cuesta?" step="0.01" min="0" value="<?=$p->get_precio()?>">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Descripción</label>
-              <input required class="form-control" type="text" name="descripcion" placeholder="¡Describe qué tan rico sabe!" value="<?=$p->get_descripcion()?>">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Disponibilidad</label>
-              <select required class="form-control" name="estatus">
-                <option value="A la venta" <?= $p->get_estatus() === 'A la venta' ? 'selected' : '' ?>>A la venta</option>
-                <option value="No disponible" <?= $p->get_estatus() === 'No disponible' ? 'selected' : '' ?>>No disponible</option>
+              <label for="form-label"><h2>Postre a agregar</h2></label>
+              <select class="form-select" name="producto_id" id="">
+                <?php foreach($this->productos->Disponibles() as $producto): ?>
+                <option value="<?= $producto->id ?>"><?= $producto->nombre ?></option>
+                <?php endforeach; ?>
               </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><h2>¿Cuántos?</h2> </label>
+              <input type="number" name="cantidad">
             </div>
 
             <div class="tile-footer">
               <button class="btn btn-primary" type="submit">
-                <i class="bi bi-check-circle-fill me-2"></i>Guardar cambios
-              </button>&nbsp;&nbsp;&nbsp;
-              <a class="btn btn-secondary" href="?c=producto">
-                <i class="bi bi-x-circle-fill me-2"></i>Regresar
+                <i class="bi bi-check-circle-fill me-2"></i>Registrar
+              </button>
+              <a class="btn btn-secondary" href="?c=venta">
+                <i class="bi bi-x-circle-fill me-2"></i>Cancelar venta
               </a>
             </div>
 
@@ -67,6 +41,60 @@
         </div>
       </div>
     </div>
+    <div class="col-6">
+        <div class="card shadow bg-body rounded h-100">
+            <div class="card-header">
+                <strong>Venta # <?= $d->get_id() ?></strong>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-6">
+                    <p>
+                      <strong>Fecha:</strong>
+                    </p>
+
+                     <p>
+                        <strong>Cliente:</strong>
+                      </p>
+                    </div>
+                </div>
+                <hr>
+                
+                    <h5>Se vendieron</h5>
+                            <span>
+                              <h6>Hola</h6>
+                          </span>
+                            <span>
+                                <h6>Hola mundo</h6>
+                            </span>
+
+                            <span>
+                                Soy puto
+                            </span>
+                        </div>
+                    <hr>
+
+                    <h4 class="text-end">
+                        Total: 
+                    </h4>
+
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>
+                        Esta venta aún no tiene productos registrados.
+                    </div>
+                <hr>
+
+                <div>
+                    <strong>Nota</strong>
+                    <p class="mb-0 text-break">
+                      <?= $d->get_nota() ?>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
   </div>
 </main>
-  </body>
+</body>

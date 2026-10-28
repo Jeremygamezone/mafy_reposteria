@@ -28,7 +28,7 @@
               <button class="btn btn-primary" type="submit">
                 <i class="bi bi-check-circle-fill me-2"></i>Registrar
               </button>&nbsp;&nbsp;&nbsp;
-              <a class="btn btn-secondary" href="?c=producto">
+              <a class="btn btn-secondary" href="?c=venta">
                 <i class="bi bi-x-circle-fill me-2"></i>Cancelar venta
               </a>
             </div>

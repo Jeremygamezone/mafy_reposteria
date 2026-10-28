@@ -98,6 +98,31 @@ class Venta{
 
         return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function Obtener($id){
+        try {
+            $consulta = $this->pdo->prepare(
+                "SELECT * FROM ventas WHERE id = ?"
+            );
+            $consulta->execute([$id]);
+            $r = $consulta->fetch(PDO::FETCH_OBJ);
+
+            if (!$r) {
+                return null;
+            }
+            $v = new Venta();
+
+            $v->set_id((int) $r->id);
+            $v->set_usuario_id((int) $r->usuario_id);
+            $v->set_fecha($r->fecha);
+            $v->set_cliente((string) $r->cliente);
+            $v->set_nota((string) $r->nota);
+
+            return $v;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     
     public function Insertar(Venta $v){
         try{

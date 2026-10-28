@@ -1,11 +1,3 @@
-<?php
-    require_once 'descuento.php';
-
-    $costoVenta = 0;
-    
-                                         $descuento = new Descuento();
-
-?>
 <main class="text-light bg-dark" style="background-color: var(--bs-wine--dark) !important;">
     <div clas="bg-dark">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
@@ -94,8 +86,9 @@
             </div>
 
             <div class="card-body">
-
-                <p>
+                <div class="row g-2">
+                    <div class="col-6">
+                    <p>
                     <strong>Fecha:</strong>
                     <?= htmlspecialchars($venta->fecha) ?>
                 </p>
@@ -104,9 +97,15 @@
                     <strong>Cliente:</strong>
                     <?= htmlspecialchars($venta->cliente ?? '') ?>
                 </p>
-
+                    </div>
+                    <div class="col-6">
+                        <span class="text-end"><a href="?c=detalle&a=FormEditar&id=<?= $venta->venta_id ?>" class="btn btn-primary btn-flat">
+                                            <i class="bi bi-plus-circle"></i>
+                                            Agregar productos
+                                </a></span>
+                    </div>
+                </div>
                 <hr>
-
                 <?php
                 // Consultamos los detalles una sola vez.
                 $detalles = $this->detalle->DetallesDeVenta(
@@ -131,6 +130,9 @@
                             <span>
                                 <?= (int) $d->cantidad ?> ×
                                 <?= htmlspecialchars($d->producto) ?>
+                            </span>
+                            <span>
+                                ($<?= $d->precio ?> C/U)
                             </span>
 
                             <span>

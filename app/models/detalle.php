@@ -68,7 +68,10 @@
 
         public function Insertar(Detalle $d){
         try{
-            $consulta="INSERT INTO detalles(venta_id, producto_id, cantidad) VALUES (?,?,?)";
+            $consulta="INSERT INTO detalles (venta_id, producto_id, cantidad)
+                        VALUES (?, ?, ?)
+                        ON DUPLICATE KEY UPDATE
+                            cantidad = cantidad + VALUES(cantidad)";
             $this->pdo->prepare($consulta)->execute(array($d->get_venta_id(),$d->get_producto_id(),$d->get_cantidad()));
 
         }catch(Exception $e){
