@@ -41,9 +41,9 @@
             $d->set_venta_id($_POST['venta_id']);
             $d->set_producto_id($_POST['producto_id']);
             $d->set_cantidad($_POST['cantidad']);
+            $d->set_notaVenta($_POST['notaVenta']);
 
             $this->detalles->Insertar($d);
-            header("location:?c=venta");
         }
     }
 ?>

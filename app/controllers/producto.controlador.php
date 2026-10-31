@@ -45,24 +45,24 @@ class ProductoControlador{
     }
 
     public function Editar(){
-    if (
-        !isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['estatus']) ||
-        !is_numeric($_POST['id'])
-    ) {
-        die('Faltan datos para editar el producto.');
+        if (
+            !isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['precio'], $_POST['estatus']) ||
+            !is_numeric($_POST['id'])
+        ) {
+            die('Faltan datos para editar el producto.');
+        }
+
+        $p = new Producto();
+
+        $p->set_id((int) $_POST['id']);
+        $p->set_nombre($_POST['nombre']);
+        $p->set_descripcion($_POST['descripcion']);
+        $p->set_precio($_POST['precio']);
+        $p->set_estatus($_POST['estatus']);
+
+        $this->model->Actualizar($p);
+
+        header("Location: ?c=producto");
+        exit;
     }
-
-    $p = new Producto();
-
-    $p->set_id((int) $_POST['id']);
-    $p->set_nombre($_POST['nombre']);
-    $p->set_descripcion($_POST['descripcion']);
-    $p->set_precio($_POST['precio']);
-    $p->set_estatus($_POST['estatus']);
-
-    $this->model->Actualizar($p);
-
-    header("Location: ?c=producto");
-    exit;
-}
 }

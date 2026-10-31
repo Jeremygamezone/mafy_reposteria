@@ -20,8 +20,11 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     >
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
 </head>
-    <h1>Reposteria</h1>
 <header class="app-header">
 
 </header>
@@ -34,6 +37,8 @@
     --bs-wine: #92003A;
     --bs-wine-darker: #3a0319;
     --bs-yellow-light: #FFE185;
+    --bs-green-light: #c3f2b9;
+    --bs-green-dark: #00650f;
 
     /* Bootstrap: color principal */
     --bs-primary: var(--bs-wine);
@@ -219,6 +224,16 @@ body {
     color: white;
 }
 
+.bg-green-light{
+    background-color: var(--bs-green-light) !important;
+    color: black;
+}
+
+.bg-green-dark{
+    background-color: var(--bs-green-dark) !important;
+    color: white;
+}
+
 .bg-pink-dark{
     background-color: var(--bs-pink-dark) !important;
     color: white;
@@ -226,6 +241,10 @@ body {
 
 .text{
   color: var(--bs-yellow-light) !important;
+}
+
+.text-green-dark{
+    color:darkgreen !important;
 }
 
 .text-yellow-light{
@@ -236,8 +255,16 @@ body {
   color: var(--bs-pink-light) !important;
 }
 
+.text-white{
+    color:white;
+}
+
 .text-dark{
   color: var(--bs-wine) !important;
+}
+
+.text-blue{
+    color:blue !important;
 }
 
 /* Texto seleccionado */
@@ -259,7 +286,7 @@ body {
             <a class="app-menu__item"
                href="?c=producto"
                data-toggle="treeview">
-                <i class="app-menu__icon bi bi-cake2"></i>
+                <i class="app-menu__icon bi bi-cake"></i>
                 <span class="app-menu__label">Postres</span>
                 <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>

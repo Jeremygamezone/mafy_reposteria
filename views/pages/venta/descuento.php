@@ -1,31 +1,17 @@
+
 <?php
 
-$a = 0;
-$b = 0;
-$c = 0;
-$texto ="";
-
-class Descuento{
-    private $id_producto;
-
-    public function getIdProducto(){
-        return $this->id_producto;
-    }
-
-    public function calcularDescuento($id_producto){
-        switch ($this->id_producto):
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-            $texto = "No aplica descuento";
-                break;
-            endswitch;
+class Descuento {
+    public function calcularDescuento($id_producto, $cantidad, $precio) {
+        
+        if (in_array((int)$id_producto, [1, 2, 3, 4]) && $cantidad >= 2) {
+            $a = $precio;
+            $b = $cantidad;
+            $c = .02;
+            $d = ($a * $c) * $b;
+            return $d;
+        }
+        return 0;
     }
 }
 ?>

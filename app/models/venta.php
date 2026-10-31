@@ -8,6 +8,7 @@ class Venta{
     private $fecha;
     private $cliente;
     private $nota;
+    private $estatus;
 
     public function __CONSTRUCT(){
         $this->pdo = DataBase::Connect();
@@ -53,9 +54,62 @@ class Venta{
         $this->nota = $nota;
     }
 
+    public function get_estatus():string{
+        return $this->estatus;
+    }
+
+    public function set_estatus(string $estatus){
+        $this->estatus = $estatus;
+    }
+
     public function Listar(){
         try{
-            $consulta=$this->pdo->prepare("SELECT * FROM ventas");
+            $consulta=$this->pdo->prepare("SELECT * FROM ventas ORDER BY id DESC");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ListarPagados(){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE estatus = 'Pagado' ORDER BY id DESC");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ListarPendientes(){
+        try{
+            $consulta=$this->pdo->prepare("SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota,
+                v.estatus
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            ORDER BY v.id DESC");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ListarCancelados(){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE estatus = 'Cancelado'");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
@@ -87,7 +141,8 @@ class Venta{
                 ) AS nombre_usuario,
                 v.fecha,
                 v.cliente,
-                v.nota
+                v.nota,
+                v.estatus
             FROM ventas v
             INNER JOIN usuarios u
                 ON v.usuario_id = u.id
@@ -117,6 +172,7 @@ class Venta{
             $v->set_fecha($r->fecha);
             $v->set_cliente((string) $r->cliente);
             $v->set_nota((string) $r->nota);
+            $v->set_estatus((string) $r->estatus);
 
             return $v;
         } catch (PDOException $e) {
@@ -126,10 +182,32 @@ class Venta{
     
     public function Insertar(Venta $v){
         try{
-            $consulta="INSERT INTO ventas(usuario_id, fecha, cliente, nota) VALUES (1,?,?,?)";
+            $consulta="INSERT INTO ventas(usuario_id, fecha, cliente, nota, estatus) VALUES (1,?,?,?,'Pendiente')";
             $this->pdo->prepare($consulta)->execute(array($v->get_fecha(),$v->get_cliente(),$v->get_nota()));
 
+            $id_venta = $this->pdo->lastInsertId();
+
+            header("Location: ?c=detalle&a=FormEditar&id=" . $id_venta);
+            exit;
         }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function Actualizar(Venta $v){
+        try {
+            $consulta = "UPDATE ventas
+                        SET cliente = ?, nota = ?, estatus = ?
+                        WHERE id = ?";
+
+            $this->pdo->prepare($consulta)->execute([
+                $v->get_cliente(),
+                $v->get_nota(),
+                $v->get_estatus(),
+                $v->get_id()
+            ]);
+
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
