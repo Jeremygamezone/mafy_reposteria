@@ -5,8 +5,8 @@
       <h1><i class="bi bi-ui-checks"></i>Postres</h1>
     </div>
   </div>
-  <div class="row flow">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-10 mx-auto">
       <div class="tile">
         <h3 class="tile-title">Editar <?=$p->get_nombre()?></h3>
         <div class="tile-body">

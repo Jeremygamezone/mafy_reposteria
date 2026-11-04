@@ -1,12 +1,18 @@
 <?php
 
 require_once '../app/models/producto.php';
+require_once '../app/models/venta.php';
+require_once '../app/models/detalle.php';
 
 class InicioControlador{
     private $model;
+    private $ventas;
+    private $detalle;
 
     public function __CONSTRUCT(){
         $this->model=new Producto();
+        $this->ventas = new Venta();
+        $this->detalles = new Detalle();
     }
 
     public function Inicio(){

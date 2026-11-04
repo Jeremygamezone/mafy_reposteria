@@ -75,65 +75,109 @@ require_once __DIR__ . "/../venta/descuento.php";
 
                 <?php if (!empty($detalles)): ?>
 
-                    <h5>Se vendieron</h5>
-
-                    <?php 
-                    switch($d->get_estatus()):
-                                    case "Pagado":
-                                        $clase = "success text-white";
-                                        break;
-                                    case "Pendiente":
-                                        $clase = "warning text-dark";
-                                        break;
-                                    case "Cancelado":
-                                        $clase = "danger text-white";
-                                        break;
-                                    default:
-                                    
-                                        break;
-                                    endswitch;
-                    foreach ($detalles as $detalle): ?>
-                        
-                        <?php
-                        $subtotal = $detalle->cantidad * $detalle->precio;
+                    <?php
+                        $total = 0;
+                        $cantidadTotalElegible = 0;
 
                         $descuento = new Descuento();
 
-                        $importeDescuento = $descuento->calcularDescuento(
-                            $detalle->producto_id,
-                            $detalle->cantidad,
-                            $detalle->precio
-                        );
+                        // PRIMER RECORRIDO: sumar unidades elegibles
+                        foreach ($detalles as $detalle) {
 
-                        $subtotalFinal = $subtotal - $importeDescuento;
+                            if (in_array((int)$detalle->producto_id, [1, 2, 3, 4])) {
+                                $cantidadTotalElegible += (int)$detalle->cantidad;
+                            }
+                        }
 
-                        $total += $subtotalFinal;
+                        // Determinar estado de la venta
+                        switch ($d->get_estatus()) {
+
+                            case "Pagado":
+                                $clase = "success text-white";
+                                break;
+
+                            case "Pendiente":
+                                $clase = "warning text-dark";
+                                break;
+
+                            case "Cancelado":
+                                $clase = "danger text-white";
+                                break;
+
+                            default:
+                                $clase = "secondary text-white";
+                                break;
+                        }
+                    ?>
+
+                    <h5>Se vendieron</h5>
+
+                    <?php if ($cantidadTotalElegible > 2): ?>
+                        <h6 class="text-primary">
+                            Esta venta aplica descuento por varios productos individuales
+                        </h6>
+                    <?php endif; ?>
+
+                    <?php foreach ($detalles as $detalle): ?>
+
+                        <?php
+                            $subtotal = (float)$detalle->cantidad * (float)$detalle->precio;
+
+                            $importeDescuento = $descuento->calcularDescuento(
+                                (int)$detalle->producto_id,
+                                (int)$detalle->cantidad,
+                                (float)$detalle->precio,
+                                $cantidadTotalElegible
+                            );
+
+                            $subtotalFinal = $subtotal - $importeDescuento["descuento"];
+
+                            $total += $subtotalFinal;
                         ?>
 
                         <div class="d-flex justify-content-between gap-2 mb-1">
+
                             <span>
-                                <?= (int) $detalle->cantidad ?> ×
+                                <?= (int)$detalle->cantidad ?> ×
                                 <?= htmlspecialchars($detalle->producto) ?>
-                            </span>
-                            <span>
-                                ($<?= $detalle->precio ?> C/U)
                             </span>
 
                             <span>
+                                ($<?= number_format((float)$detalle->precio, 2) ?> C/U)
+                            </span>
+
+                            <span>
+                                <?php if ($importeDescuento["descuento"] > 0): ?>
+
+                                    (Descuento de $<?= number_format($importeDescuento["descuento"], 2) ?>)
+
+                                    <del class="text-black">
+                                        $<?= number_format($subtotal, 2) ?>
+                                    </del>
+
+                                <?php endif; ?>
+
                                 $<?= number_format($subtotalFinal, 2) ?>
                             </span>
+
                         </div>
 
                     <?php endforeach; ?>
+
                     <hr>
+
                     <div class="row">
+
                         <h4 class="col p-2 rounded shadow bg-<?= $clase ?>">
-                        <?= $d->get_estatus() ?>
-                    </h4>
-                    <h4 class="col text-end">
-                        Total: $<?= number_format($total, 2) ?>
-                    </h4>
+                            <?= htmlspecialchars($d->get_estatus()) ?>
+                        </h4>
+
+                        <h4 class="col text-end">
+                            Total: $<?= number_format($total, 2) ?>
+                        </h4>
+
                     </div>
+
                 <?php else: ?>
 
                     <div class="alert alert-warning" role="alert">

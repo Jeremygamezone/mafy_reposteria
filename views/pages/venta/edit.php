@@ -5,8 +5,8 @@
       <h1><i class="bi bi-ui-checks"></i>Venta</h1>
     </div>
   </div>
-  <div class="row flow">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-10 mx-auto">
       <div class="tile">
         <h3 class="tile-title">Editar Información de la Venta #<?=$v->get_id()?></h3>
         <div class="tile-body">
