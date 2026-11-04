@@ -1,6 +1,6 @@
-<body>    
-<main class="text-light bg-dark">
-    <div class="row col-12 col-lg-10 mx-auto">
+<body class="bg-image-sales">
+<main class="col-12 col-lg-10 mx-auto">
+    <div class="row mx-auto">
         <div class="bg-dark">
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
                 <h1><i class="bi bi-book"></i> Ventas</h1>
@@ -10,7 +10,6 @@
             <div class="col-12 col-xl-6 card-custom" id="VentasSimples">
                 <div class="table-responsive rounded">
                     <table class="table table-hover rounded" id="tabla-ventas">
-
                         <thead>
                             <tr>
                                 <th>venta</th>
@@ -19,7 +18,6 @@
                                 <th>Detalles</th>
                             </tr>
                         </thead>
-
                     <tbody>
                                     <?php foreach ($this->venta->Listar() as $r): ?>
 
@@ -102,13 +100,11 @@
                                 <?php foreach ($ventasPagadas as $r): ?>
 
                                     <?php
-                                        // Obtener detalles de la venta actual
                                         $detalles = $this->detalle->DetallesDeVenta($r->id);
 
                                         $total = 0;
                                         $cantidadTotalElegible = 0;
 
-                                        // PRIMER RECORRIDO: sumar unidades elegibles
                                         foreach ($detalles as $d) {
 
                                             if (in_array((int)$d->producto_id, [1, 2, 3, 4])) {
@@ -116,7 +112,6 @@
                                             }
                                         }
 
-                                        // SEGUNDO RECORRIDO: calcular subtotales y descuentos
                                         foreach ($detalles as $d) {
 
                                             $subtotal = (float)$d->cantidad * (float)$d->precio;
@@ -134,7 +129,7 @@
                                         $ganancia += $total;
                                     ?>
 
-                                    <div class="border rounded p-3 m-1 bg-green-light d-flex justify-content-between align-items-center">
+                                    <div class="border rounded pt-1 pb-1 p-2 mb-1 bg-green-light d-flex justify-content-between align-items-center">
                                         <div>
                                             <strong>Venta #<?= (int)$r->id ?></strong>
                                             <a onclick="window.location.href='#venta-<?= (int) $r->id ?>'"
@@ -304,16 +299,17 @@
                                                 </span>
 
                                                 <span>
-                                                    ($<?= number_format((float) $d->precio, 2) ?> C/U) <u class="<?= $importeDescuento["clase"] ?>"> - $<?= $importeDescuento["descuento"] ?></u>
+                                                    ($<?= number_format((float) $d->precio, 2) ?> C/U) <u class="<?= $importeDescuento["clase"] ?>"></u>
                                                 </span>
 
                                                 <span class="<?= $importeDescuento["clase"] ?>">
                                                     <?php if ($importeDescuento["descuento"] > 0): ?>
                                                         <del class="text-black">
-                                                            $<?= number_format($subtotal, 2) ?>
+                                                            $<?= number_format($subtotal, 2) ?> 
                                                         </del>
+                                                         <strong><?= $importeDescuento["warning"] ?></strong>
                                                     <?php endif; ?>
-
+                                                    <br>
                                                     $<?= number_format($subtotalFinal, 2) ?>
                                                 </span>
 

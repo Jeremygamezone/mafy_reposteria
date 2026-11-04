@@ -1,4 +1,4 @@
-<body>
+<body class="bg-image-01">
     <main class="col-12 col-lg-10 mx-auto">
       <div class="mb-4 p-3">
         <h1 class="text-center text-light"><i class="bi bi-bookmark-heart"></i>   Bienvenida     <i class="bi bi-bookmark-heart"></i></h1>
@@ -6,10 +6,10 @@
       <div class="row">
         <div class="col-md-6">
           <div class="tile">
-            <div class="mb-5">
+            <div class="mb-5 text-dark">
               <h1>Postres</h1>
             </div>
-              <div id="salesChart">
+              <div id="salesChart" class="text-dark">
                 <?php $p=$this->model->Disponibles()?>
                 <h2><?php foreach($p as $producto): ?>
                     <p><?= $producto->nombre ?> - $<?= number_format($producto->precio, 2) ?></p>
@@ -64,7 +64,6 @@
                                             $total += $subtotal - $importeDescuento["descuento"];
                                         }
 
-                                        // Acumular ganancias de todas las ventas pagadas
                                         $ganancia += $total;
                                     ?>
 

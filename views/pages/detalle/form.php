@@ -1,12 +1,7 @@
 <?php 
 ?>
 <body class="">
-    <main class="">
-  <div class="app-title">
-    <div>
-      <h1><i class="bi bi-ui-checks"></i>Pedido <?= $_GET['id'] ?></h1>
-    </div>
-  </div>
+  <main class="col-12 col-lg-10 mx-auto">
   <div class="row flow">
     <div class="col-md-6">
       <div class="tile">

@@ -15,7 +15,7 @@ class Descuento {
         ) {
             return [
                 'clase' => "text-blue",
-                'warning' => "Descuento aplicado",
+                'warning' => '- $'.($cantidad * 2),
                 'cantidad' => $cantidadTotalElegible,
                 'descuento' => ($cantidad * 2)
             ];

@@ -7,7 +7,7 @@ require_once '../app/models/detalle.php';
 class InicioControlador{
     private $model;
     private $ventas;
-    private $detalle;
+    private $detalles;
 
     public function __CONSTRUCT(){
         $this->model=new Producto();

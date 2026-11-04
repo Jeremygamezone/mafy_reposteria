@@ -1,12 +1,7 @@
-<body class="">
-    <main class="">
-  <div class="app-title">
-    <div>
-      <h1><i class="bi bi-ui-checks"></i>¡Nueva Venta!</h1>
-    </div>
-  </div>
+<body class="bg-image-checkout">
+   <main class="col-12 col-lg-10 mx-auto">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-10 mx-auto text-dark">
       <div class="tile">
         <h3 class="tile-title">Venta</h3>
         <div class="tile-body">
@@ -41,8 +36,8 @@
 </main>
 </body>
 <script>
+    const ahora = new Date();
     function actualizarFecha() {
-        const ahora = new Date();
 
         const formato = ahora.getFullYear() + '-' +
             String(ahora.getMonth() + 1).padStart(2, '0') + '-' +
@@ -53,6 +48,5 @@
 
         document.getElementById('fecha').value = formato;
     }
-
     actualizarFecha();
 </script>

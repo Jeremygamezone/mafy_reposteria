@@ -1,12 +1,7 @@
-<body>
-    <main >
-  <div class="app-title">
-    <div>
-      <h1><i class="bi bi-ui-checks"></i>Venta</h1>
-    </div>
-  </div>
+<body class="bg-image-checkout">
+    <main class="col-12 col-lg-10 mx-auto">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-10 mx-auto text-dark">
       <div class="tile">
         <h3 class="tile-title">Editar Información de la Venta #<?=$v->get_id()?></h3>
         <div class="tile-body">
@@ -18,8 +13,6 @@
                     value=""
                 >
             </div>
-             
-
             <div class="mb-3">
               <input type="hidden" name="id" value="<?=$v->get_id()?>">
               <input type="hidden" name="usuario_id" value="<?=$v->get_usuario_id()?>">
@@ -51,7 +44,6 @@
                 <i class="bi bi-x-circle-fill me-2"></i>Regresar
               </a>
             </div>
-
           </form>
         </div>
       </div>

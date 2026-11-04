@@ -44,6 +44,7 @@ $descuento = new Descuento();
     --bs-yellow-light: #FFE185;
     --bs-green-light: #c3f2b9;
     --bs-green-dark: #00650f;
+    --bs-grey: #270015b5;
 
     --bs-primary: var(--bs-wine);
     --bs-primary-rgb: 146, 0, 58;
@@ -58,17 +59,130 @@ $descuento = new Descuento();
     --bs-focus-ring-color: rgba(179, 46, 108, 0.25);
 
     --bs-body-bg: #FFF9FC;
-    --bs-body-color: #38232D;
+    --bs-body-color: #4f0516;
     --bs-border-color: #F0D6E3;
 }
 
+.sidebar{
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--bs-grey);
+}
+
 main {
-    padding: 20px;
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px;
+    background-color: var(--bs-grey);
+    color: white;
+}
+
+footer{
+    margin: 0px;
+    padding: 10px;
+    background-color: var(--bs-grey);
+    color: white;
 }
 
 body {
-    background-color: #340005;
-    color: #38232D;
+    background-color: var(--bs-body-color);
+}
+
+.bg-image-01 {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/264881.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.bg-image-02 {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/3597222.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.bg-image-03 {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/3597213.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.bg-image-sales {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/sales.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.bg-image-checkout {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/type.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.bg-image-checkout {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('http://localhost:8080/mafy_reposteria/public/images/clip.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
 }
 
 .app-header {
@@ -273,13 +387,11 @@ body {
     color:red !important;
 }
 
-/* Texto seleccionado */
 ::selection {
     color: var(--bs-wine);
     background-color: var(--bs-yellow-light);
 }
 
-/* Ambas secciones */
 #VentasSimples,
 #VentasPagadas {
     height: 500px;
@@ -287,7 +399,6 @@ body {
     max-height: 500px;
 }
 
-/* VENTAS SIMPLES */
 #VentasSimples .table-responsive {
     height: 100%;
     overflow: hidden;
@@ -298,7 +409,6 @@ body {
     table-layout: fixed;
 }
 
-/* Encabezado fijo */
 #tabla-ventas thead,
 #tabla-ventas tbody tr {
     display: table;
@@ -306,7 +416,6 @@ body {
     table-layout: fixed;
 }
 
-/* Únicamente el cuerpo de la tabla tiene scroll */
 #tabla-ventas tbody {
     display: block;
     max-height: 445px;
@@ -314,7 +423,6 @@ body {
     overflow-x: hidden;
 }
 
-/* VENTAS PAGADAS */
 #VentasPagadas > .card {
     height: 100%;
 }
@@ -333,10 +441,9 @@ body {
 }
 </style>
 
-<aside class="sidebar">
-    <ul class="app-menu">
-
-        <li>
+<div class="sidebar col-12 col-lg-10 mx-auto m-0 p-2 pt-5">
+    <ul class="app-menu  row">
+        <li class="col-4 mx-auto rounded">
             <a class="app-menu__item"
                href="index.php"
                data-toggle="treeview">
@@ -345,7 +452,7 @@ body {
                 <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>
         </li>
-        <li>
+        <li class="col-4 mx-auto rounded">
             <a class="app-menu__item"
                href="?c=producto"
                data-toggle="treeview">
@@ -354,8 +461,7 @@ body {
                 <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>
         </li>
-
-        <li>
+        <li class="col-4 mx-auto rounded">
             <a class="app-menu__item"
                href="?c=venta"
                data-toggle="treeview">
@@ -366,4 +472,4 @@ body {
         </li>
     </ul>
 
-</aside>
+</div>

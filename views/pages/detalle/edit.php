@@ -2,14 +2,9 @@
 require_once __DIR__ . "/../venta/descuento.php";
 ?>
 
-<body class="">
-    <main class="">
-  <div class="app-title">
-    <div>
-      <h1><i class="bi bi-ui-checks"></i>Detalles del pedido <?= $_GET['id'] ?></h1>
-    </div>
-  </div>
-  <div class="row flow">
+<body class="bg-image-03">
+<main class="col-12 col-lg-10 mx-auto">
+  <div class="row flow col-12">
     <div class="col-12 col-md-6 mb-3">
       <div class="card shadow bg-body rounded">
           <form method="POST" action="?c=detalle&a=guardar">
@@ -111,12 +106,6 @@ require_once __DIR__ . "/../venta/descuento.php";
                     ?>
 
                     <h5>Se vendieron</h5>
-
-                    <?php if ($cantidadTotalElegible > 2): ?>
-                        <h6 class="text-primary">
-                            Esta venta aplica descuento por varios productos individuales
-                        </h6>
-                    <?php endif; ?>
 
                     <?php foreach ($detalles as $detalle): ?>
 

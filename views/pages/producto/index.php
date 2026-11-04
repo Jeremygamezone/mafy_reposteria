@@ -1,5 +1,5 @@
-<body> 
-<main class="text-light bg-dark">
+<body class="bg-image-02">
+<main class="col-12 col-lg-10 mx-auto">
       <div class="row">
         <div class="col-12 col-lg-10 mx-auto">
           <div class="bg-dark">
