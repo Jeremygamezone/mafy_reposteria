@@ -23,6 +23,12 @@
             require_once '../views/pages/footer.php';
         }
 
+        public function IndexVentas(){
+            require_once '../views/pages/header.php';
+            require_once '../views/pages/venta/sales.php';
+            require_once '../views/pages/footer.php';
+        }
+
         public function FormEditar()
         {
             $id = isset($_GET['id']) ? (int) $_GET['id'] : null;

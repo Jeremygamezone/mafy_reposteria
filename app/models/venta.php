@@ -62,6 +62,8 @@ class Venta{
         $this->estatus = $estatus;
     }
 
+
+
     public function Listar(){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM ventas ORDER BY id DESC");
@@ -72,10 +74,10 @@ class Venta{
         }
     }
 
-    public function ListarPagados(){
+    public function ListarPagados($inicioSemana,$finSemana){
         try{
-            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE estatus = 'Pagado' ORDER BY id DESC");
-            $consulta->execute();
+            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE (estatus = 'Pagado') AND (date(fecha) BETWEEN ? and ?) ORDER BY id DESC");
+            $consulta->execute(array(($inicioSemana),($finSemana)));
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
             die($e->getMessage());
@@ -128,7 +130,7 @@ class Venta{
         }
     }
 
-        public function ListarB()
+    public function ListarB()
     {
         $consulta = $this->pdo->prepare("
             SELECT
@@ -150,6 +152,61 @@ class Venta{
         ");
 
         $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function ListarSemanaActual()
+    {
+        $consulta = $this->pdo->prepare("
+            SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota,
+                v.estatus
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            WHERE (date(v.fecha) between ? and ?)
+            ORDER BY v.id DESC
+        ");
+
+        $consulta->execute(array(($_GET['isemana']),($_GET['fsemana'])));
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function ListarSemanaPendientes()
+    {
+        $consulta = $this->pdo->prepare("
+            SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota,
+                v.estatus
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            WHERE (date(v.fecha) between ? and ?)
+            AND estatus = 'Pendiente'
+            ORDER BY v.id DESC
+        ");
+
+        $consulta->execute(array(($_GET['isemana']),($_GET['fsemana'])));
 
         return $consulta->fetchAll(PDO::FETCH_OBJ);
     }

@@ -341,6 +341,11 @@ body {
     color: black;
 }
 
+.bg-red-dark{
+    background-color:darkred !important;
+    color: white;
+}
+
 .bg-green-dark{
     background-color: var(--bs-green-dark) !important;
     color: white;

@@ -40,7 +40,7 @@
               <button class="btn btn-primary" type="submit">
                 <i class="bi bi-check-circle-fill me-2"></i>Guardar cambios
               </button>
-              <a class="btn btn-secondary" href="?c=venta">
+              <a class="btn btn-secondary" href="?c=venta#venta-<?=$v->get_id()?>">
                 <i class="bi bi-x-circle-fill me-2"></i>Regresar
               </a>
             </div>

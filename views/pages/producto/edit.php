@@ -1,7 +1,7 @@
 <body class="bg-image-03">
 <main class="col-12 col-lg-10 mx-auto">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-10 mx-auto text-dark">
       <div class="tile">
         <h3 class="tile-title">Editar <?=$p->get_nombre()?></h3>
         <div class="tile-body">

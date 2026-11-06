@@ -34,7 +34,7 @@ require_once __DIR__ . "/../venta/descuento.php";
               <button class="btn btn-primary m-2 p-2" type="submit">
                 <i class="bi bi-check-circle-fill me-2"></i>Registrar
               </button>
-              <a class="btn btn-success m-2 p-2" href="?c=venta">
+              <a class="btn btn-success m-2 p-2" href="?c=venta#venta-<?=$d->get_id()?>">
                 <i class="bi bi-check-circle-fill me-2"></i>Terminado/Regresar
               </a>
               </div>
@@ -135,17 +135,15 @@ require_once __DIR__ . "/../venta/descuento.php";
                                 ($<?= number_format((float)$detalle->precio, 2) ?> C/U)
                             </span>
 
-                            <span>
+                            <span class="<?=($importeDescuento["clase"]) ?>">
                                 <?php if ($importeDescuento["descuento"] > 0): ?>
-
-                                    (Descuento de $<?= number_format($importeDescuento["descuento"], 2) ?>)
-
+                                    
                                     <del class="text-black">
                                         $<?= number_format($subtotal, 2) ?>
                                     </del>
-
+                                    <strong><?=($importeDescuento["warning"]) ?></strong>
+                                <br>
                                 <?php endif; ?>
-
                                 $<?= number_format($subtotalFinal, 2) ?>
                             </span>
 
