@@ -76,6 +76,7 @@ main {
     padding: 10px;
     background-color: var(--bs-grey);
     color: white;
+    min-height: 85vh;
 }
 
 footer{
@@ -95,7 +96,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/264881.jpg');
+        url('http://localhost/mafy_reposteria/public/images/264881.jpg');
 
     background-size: cover;
     background-position: center;
@@ -111,7 +112,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/3597222.jpg');
+        url('http://localhost/mafy_reposteria/public/images/3597222.jpg');
 
     background-size: cover;
     background-position: center;
@@ -127,7 +128,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/3597213.jpg');
+        url('http://localhost/mafy_reposteria/public/images/3597213.jpg');
 
     background-size: cover;
     background-position: center;
@@ -143,7 +144,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/sales.jpg');
+        url('http://localhost/mafy_reposteria/public/images/sales.jpg');
 
     background-size: cover;
     background-position: center;
@@ -159,7 +160,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/type.jpg');
+        url('http://localhost/mafy_reposteria/public/images/type.jpg');
 
     background-size: cover;
     background-position: center;
@@ -175,7 +176,7 @@ body {
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
         ),
-        url('http://localhost:8080/mafy_reposteria/public/images/clip.jpg');
+        url('http://localhost/mafy_reposteria/public/images/clip.jpg');
 
     background-size: cover;
     background-position: center;

@@ -204,10 +204,10 @@
                     <h2><i class="bi bi-receipt"></i> Todas las ventas</h2>
                 </div>
                 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 m-4 mx-auto">
-                        <a class="btn btn-warning" id="func-1" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=1"><h2>Pendiente</h2></a>
-                        <a class="btn btn-success" id="func-2" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=2"><h2>Pagado</h2></a>
-                        <a class="btn btn-danger" id="func-3" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=3"><h2>Cancelado</h2></a>
-                        <a class="btn btn-primary" id="func-4" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=4"><h2>Todas</h2></a>
+                        <a class="btn btn-warning" id="func-1" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=1"><h2>Ventas pendiente</h2></a>
+                        <a class="btn btn-success" id="func-2" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=2"><h2>Ventas pagadas</h2></a>
+                        <a class="btn btn-danger" id="func-3" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=3"><h2>Ventas canceladas</h2></a>
+                        <a class="btn btn-primary" id="func-4" href="?c=venta&a=IndexVentas&isemana=<?= $fechaDeHoy['inicio_semana'] ?>&fsemana=<?= $fechaDeHoy['fin_semana'] ?>&func=4"><h2>Todas las ventas</h2></a>
                 </div>
                 <div class="card col-12 p-2 mt-5 mb-3">
                             <h4 class=""> Las ventas con texto azul aplican descuento por tener más de 2 productos individuales</h4>
