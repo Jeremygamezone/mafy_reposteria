@@ -2,475 +2,469 @@
 require_once __DIR__ . "/venta/descuento.php";
 
 $descuento = new Descuento();
+$fechaDeHoy = $descuento->ObtenerFecha();
 ?>
 
 <head>
     <meta name="description" content="Sistema administrativo de repostería">
-
-   
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Repostería">
     <meta property="og:title" content="Sistema administrativo de repostería">
-
-    <title>Repostería</title>
-
+    <title>Mafy's Pattisiere</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
     <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-
-    
     <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-    >
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link
-    rel="stylesheet"    
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-    >
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <header class="app-header">
 
 </header>
 
 <style>
-:root {
-    --bs-pink-light: #ED96D7;
-    --bs-pink-dark: #B32E6C;
-    --bs-wine: #92003A;
-    --bs-wine-darker: #3a0319;
-    --bs-yellow-light: #FFE185;
-    --bs-green-light: #c3f2b9;
-    --bs-green-dark: #00650f;
-    --bs-grey: #270015b5;
-
-    --bs-primary: var(--bs-wine);
-    --bs-primary-rgb: 146, 0, 58;
-    --bs-primary-text-emphasis: #6A002A;
-    --bs-primary-bg-subtle: #F8DDE9;
-    --bs-primary-border-subtle: #E9A5C0;
-
-    --bs-link-color: var(--bs-wine);
-    --bs-link-color-rgb: 146, 0, 58;
-    --bs-link-hover-color: var(--bs-pink-dark);
-    --bs-link-hover-color-rgb: 179, 46, 108;
-    --bs-focus-ring-color: rgba(179, 46, 108, 0.25);
-
-    --bs-body-bg: #FFF9FC;
-    --bs-body-color: #4f0516;
-    --bs-border-color: #F0D6E3;
-}
-
-.sidebar{
-    margin: 10px;
-    padding: 10px;
-    background-color: var(--bs-grey);
-}
-
-main {
-    margin: 10px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding: 10px;
-    background-color: var(--bs-grey);
-    color: white;
-    min-height: 85vh;
-}
-
-footer{
-    margin: 0px;
-    padding: 10px;
-    background-color: var(--bs-grey);
-    color: white;
-}
-
-body {
-    background-color: var(--bs-body-color);
-}
-
-.bg-image-01 {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/264881.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.bg-image-02 {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/3597222.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.bg-image-03 {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/3597213.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.bg-image-sales {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/sales.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.bg-image-checkout {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/type.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.bg-image-checkout {
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url('http://localhost/mafy_reposteria/public/images/clip.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    min-height: 100vh;
-}
-
-.app-header {
-    background-color: var(--bs-wine);
-    box-shadow: 0 2px 10px rgba(146, 0, 58, 0.18);
-}
-
-.app-header__logo {
-    color: #FFFFFF;
-}
-
-.app-header__logo:hover,
-.app-header__logo:focus {
-    color: var(--bs-yellow-light);
-}
-
-.app-sidebar {
-    background-color: var(--bs-wine);
-}
-
-.app-sidebar__user {
-    color: #FFFFFF;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.app-menu__item {
-    color: #FFFFFF;
-    border-left-color: transparent;
-}
-
-.app-menu__item.active,
-.app-menu__item:hover,
-.app-menu__item:focus {
-    color: #FFFFFF;
-    background-color: var(--bs-pink-dark);
-    border-left-color: var(--bs-yellow-light);
-}
-
-.treeview-menu {
-    background-color: #70002D;
-}
-
-.treeview.is-expanded [data-toggle="treeview"] {
-    background-color: var(--bs-pink-dark);
-    border-left-color: var(--bs-yellow-light);
-}
-
-.treeview-item {
-    color: #FFFFFF;
-}
-
-.treeview-item.active,
-.treeview-item:hover,
-.treeview-item:focus {
-    color: #FFFFFF;
-    background-color: var(--bs-pink-dark);
-}
-
-.title-font{
-    color: #fff;
-  text-align: center;
-  font-family: "Niconne";
-}
-
-.app-content {
-    background-color: #FFF9FC;
-}
-
-.app-title {
-    background-color: #FFFFFF;
-    border-bottom: 3px solid var(--bs-pink-light);
-}
-
-.app-title h1,
-.app-title h2,
-.app-title h3 {
-    color: var(--bs-wine);
-}
-
-.card-header {
-    background-color: #FCEAF4;
-    color: var(--bs-wine);
-    border-bottom-color: #F0D6E3;
-}
-
-.btn-primary {
-    --bs-btn-bg: var(--bs-wine);
-    --bs-btn-border-color: var(--bs-wine);
-    --bs-btn-hover-bg: var(--bs-pink-dark);
-    --bs-btn-hover-border-color: var(--bs-pink-dark);
-    --bs-btn-active-bg: var(--bs-pink-dark);
-    --bs-btn-active-border-color: var(--bs-pink-dark);
-    --bs-btn-color: #FFFFFF;
-    --bs-btn-hover-color: #FFFFFF;
-}
-
-.btn-reposteria {
-    color: var(--bs-wine);
-    background-color: var(--bs-pink-light);
-    border: 1px solid var(--bs-pink-light);
-}
-
-.btn-reposteria:hover,
-.btn-reposteria:focus {
-    color: var(--bs-wine);
-    background-color: var(--bs-yellow-light);
-    border-color: var(--bs-yellow-light);
-}
-
-.table {
-    --bs-table-hover-bg: rgba(237, 150, 215, 0.15);
-    --bs-table-hover-color: #38232D;
-    border-color: #F0D6E3;
-}
-
-.table thead th {
-    background-color: var(--bs-wine);
-    color: #FFFFFF;
-    border-color: var(--bs-wine);
-}
-
-.table-hover tbody tr:hover > * {
-    --bs-table-bg-state: rgba(237, 150, 215, 0.15);
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--bs-pink-dark);
-    box-shadow: 0 0 0 0.25rem rgba(179, 46, 108, 0.20);
-}   
-
-.bg-image {
-    background-image: url('/mafy_reposteria/public/images/264991.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.bg-light {
-    background-color: var(--bs-pink-light) !important;
-    color: var(--bs-pink-light) !important;
-}
-
-.bg-dark {
-    background-color: var(--bs-wine--dark) !important;
-    color: var(--bs-wine--dark) !important;
-}
-
-.bg-pink{
-    background-color: var(--bs-pink-light) !important;
-    color: white;
-}
-
-.bg-green-light{
-    background-color: var(--bs-green-light) !important;
-    color: black;
-}
-
-.bg-red-dark{
-    background-color:darkred !important;
-    color: white;
-}
-
-.bg-green-dark{
-    background-color: var(--bs-green-dark) !important;
-    color: white;
-}
-
-.bg-pink-dark{
-    background-color: var(--bs-pink-dark) !important;
-    color: white;
-}
-
-.text{
-  color: var(--bs-yellow-light) !important;
-}
-
-.text-green-dark{
-    color:darkgreen !important;
-}
-
-.text-yellow-light{
-  color: var(--bs-yellow-light) !important;
-}
-
-.text-light{
-  color: var(--bs-pink-light) !important;
-}
-
-.text-white{
-    color:white;
-}
-
-.text-dark{
-  color: var(--bs-wine) !important;
-}
-
-.text-blue{
-    color:blue !important;
-}
-
-.text-black{
-    color:black !important;
-}
-
-.text-red{
-    color:red !important;
-}
-
-::selection {
-    color: var(--bs-wine);
-    background-color: var(--bs-yellow-light);
-}
-
-#VentasSimples,
-#VentasPagadas {
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
-}
-
-#VentasSimples .table-responsive {
-    height: 100%;
-    overflow: hidden;
-}
-
-#tabla-ventas {
-    width: 100%;
-    table-layout: fixed;
-}
-
-#tabla-ventas thead,
-#tabla-ventas tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-#tabla-ventas tbody {
-    display: block;
-    max-height: 445px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#VentasPagadas > .card {
-    height: 100%;
-}
-
-#VentasPagadas .card-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-}
-
-#VentasPagadas .ventas-pagadas-scroll {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+    :root {
+        --bs-pink-light: #ED96D7;
+        --bs-pink-dark: #B32E6C;
+        --bs-wine: #92003A;
+        --bs-wine-darker: #3a0319;
+        --bs-yellow-light: #FFE185;
+        --bs-yellow-dark: #584c29;
+        --bs-green-light: #c3f2b9;
+        --bs-green-dark: #00650f;
+        --bs-grey: #270015b5;
+
+        --bs-primary: var(--bs-wine);
+        --bs-primary-rgb: 146, 0, 58;
+        --bs-primary-text-emphasis: #6A002A;
+        --bs-primary-bg-subtle: #F8DDE9;
+        --bs-primary-border-subtle: #E9A5C0;
+
+        --bs-link-color: var(--bs-wine);
+        --bs-link-color-rgb: 146, 0, 58;
+        --bs-link-hover-color: var(--bs-pink-dark);
+        --bs-link-hover-color-rgb: 179, 46, 108;
+        --bs-focus-ring-color: rgba(179, 46, 108, 0.25);
+
+        --bs-body-bg: #FFF9FC;
+        --bs-body-color: #4f0516;
+        --bs-border-color: #F0D6E3;
+    }
+
+    .sidebar {
+        margin: 10px;
+        padding: 10px;
+        background-color: var(--bs-grey);
+    }
+
+    main {
+        margin: 10px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 10px;
+        background-color: var(--bs-grey);
+        color: white;
+        min-height: 85vh;
+    }
+
+    footer {
+        margin: 0px;
+        padding: 10px;
+        background-color: var(--bs-grey);
+        color: white;
+    }
+
+    body {
+        background-color: var(--bs-body-color);
+    }
+
+    .bg-image-01 {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/264881.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .bg-image-02 {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/3597222.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .bg-image-03 {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/3597213.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .bg-image-sales {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/sales.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .bg-image-checkout {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/type.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .bg-image-checkout {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/clip.jpg');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .app-header {
+        background-color: var(--bs-wine);
+        box-shadow: 0 2px 10px rgba(146, 0, 58, 0.18);
+    }
+
+    .app-header__logo {
+        color: #FFFFFF;
+    }
+
+    .app-header__logo:hover,
+    .app-header__logo:focus {
+        color: var(--bs-yellow-light);
+    }
+
+    .app-sidebar {
+        background-color: var(--bs-wine);
+    }
+
+    .app-sidebar__user {
+        color: #FFFFFF;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .app-menu__item {
+        color: #FFFFFF;
+        border-left-color: transparent;
+    }
+
+    .app-menu__item.active,
+    .app-menu__item:hover,
+    .app-menu__item:focus {
+        color: #FFFFFF;
+        background-color: var(--bs-pink-dark);
+        border-left-color: var(--bs-yellow-light);
+    }
+
+    .treeview-menu {
+        background-color: #70002D;
+    }
+
+    .treeview.is-expanded [data-toggle="treeview"] {
+        background-color: var(--bs-pink-dark);
+        border-left-color: var(--bs-yellow-light);
+    }
+
+    .treeview-item {
+        color: #FFFFFF;
+    }
+
+    .treeview-item.active,
+    .treeview-item:hover,
+    .treeview-item:focus {
+        color: #FFFFFF;
+        background-color: var(--bs-pink-dark);
+    }
+
+    .title-font {
+        color: #fff;
+        text-align: center;
+        font-family: "Niconne";
+    }
+
+    .app-content {
+        background-color: #FFF9FC;
+    }
+
+    .app-title {
+        background-color: #FFFFFF;
+        border-bottom: 3px solid var(--bs-pink-light);
+    }
+
+    .app-title h1,
+    .app-title h2,
+    .app-title h3 {
+        color: var(--bs-wine);
+    }
+
+    .card-header {
+        background-color: #FCEAF4;
+        color: var(--bs-wine);
+        border-bottom-color: #F0D6E3;
+    }
+
+    .btn-primary {
+        --bs-btn-bg: var(--bs-wine);
+        --bs-btn-border-color: var(--bs-wine);
+        --bs-btn-hover-bg: var(--bs-pink-dark);
+        --bs-btn-hover-border-color: var(--bs-pink-dark);
+        --bs-btn-active-bg: var(--bs-pink-dark);
+        --bs-btn-active-border-color: var(--bs-pink-dark);
+        --bs-btn-color: #FFFFFF;
+        --bs-btn-hover-color: #FFFFFF;
+    }
+
+    .btn-reposteria {
+        color: var(--bs-wine);
+        background-color: var(--bs-pink-light);
+        border: 1px solid var(--bs-pink-light);
+    }
+
+    .btn-reposteria:hover,
+    .btn-reposteria:focus {
+        color: var(--bs-wine);
+        background-color: var(--bs-yellow-light);
+        border-color: var(--bs-yellow-light);
+    }
+
+    .table {
+        --bs-table-hover-bg: rgba(237, 150, 215, 0.15);
+        --bs-table-hover-color: #38232D;
+        border-color: #F0D6E3;
+    }
+
+    .table thead th {
+        background-color: var(--bs-wine);
+        color: #FFFFFF;
+        border-color: var(--bs-wine);
+    }
+
+    .table-hover tbody tr:hover>* {
+        --bs-table-bg-state: rgba(237, 150, 215, 0.15);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--bs-pink-dark);
+        box-shadow: 0 0 0 0.25rem rgba(179, 46, 108, 0.20);
+    }
+
+    .bg-image {
+        background-image: url('/mafy_reposteria/public/images/264991.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .bg-light {
+        background-color: var(--bs-pink-light) !important;
+        color: var(--bs-pink-light) !important;
+    }
+
+    .bg-dark {
+        background-color: var(--bs-wine--dark) !important;
+        color: var(--bs-wine--dark) !important;
+    }
+
+    .bg-pink {
+        background-color: var(--bs-pink-light) !important;
+        color: white;
+    }
+
+    .bg-green-light {
+        background-color: var(--bs-green-light) !important;
+        color: black;
+    }
+
+    .bg-red-dark {
+        background-color: darkred !important;
+        color: white;
+    }
+
+    .bg-green-dark {
+        background-color: var(--bs-green-dark) !important;
+        color: white;
+    }
+
+    .bg-yellow-light {
+        background-color: var(--bs-yellow-light) !important;
+    }
+
+    .bg-pink-dark {
+        background-color: var(--bs-pink-dark) !important;
+        color: white;
+    }
+
+    .text {
+        color: var(--bs-yellow-light) !important;
+    }
+
+    .text-green-light{
+        color: var(--bs-green-light) !important;
+    }
+
+    .text-green-dark {
+        color: darkgreen !important;
+    }
+
+    .text-yellow-light {
+        color: var(--bs-yellow-light) !important;
+    }
+
+    .text-yellow-dark {
+        color: var(--bs-yellow-dark) !important;
+    }
+
+    .text-light {
+        color: var(--bs-pink-light) !important;
+    }
+
+    .text-white {
+        color: white;
+    }
+
+    .text-dark {
+        color: var(--bs-wine) !important;
+    }
+
+    .text-blue {
+        color: blue !important;
+    }
+
+    .text-black {
+        color: black !important;
+    }
+
+    .text-red {
+        color: red !important;
+    }
+
+    ::selection {
+        color: var(--bs-wine);
+        background-color: var(--bs-yellow-light);
+    }
+
+    #VentasSimples,
+    #VentasPagadas {
+        height: 500px;
+        min-height: 500px;
+        max-height: 500px;
+    }
+
+    #VentasSimples .table-responsive {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #tabla-ventas {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    #tabla-ventas thead,
+    #tabla-ventas tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    #tabla-ventas tbody {
+        display: block;
+        max-height: 445px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #VentasPagadas>.card {
+        height: 100%;
+    }
+
+    #VentasPagadas .card-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    #VentasPagadas .ventas-pagadas-scroll {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 </style>
 
-<div class="sidebar col-12 col-lg-10 mx-auto m-0 p-2 pt-5">
-    <ul class="app-menu  row">
-        <li class="col-4 mx-auto rounded">
-            <a class="app-menu__item"
-               href="index.php"
-               data-toggle="treeview">
+<div class="sidebar col-12 col-lg-10 mx-auto pt-1 m-0 p-2 pt-5">
+    <ul class="row list-unstyled g-2">
+        <li class="col-12 col-md-6 col-lg-4">
+            <a class="app-menu__item rounded"
+                href="index.php"
+                data-toggle="treeview">
                 <i class="app-menu__icon bi bi-house-heart"></i>
                 <span class="app-menu__label">Inicio</span>
                 <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>
         </li>
-        <li class="col-4 mx-auto rounded">
-            <a class="app-menu__item"
-               href="?c=producto"
-               data-toggle="treeview">
+
+        <li class="col-12 col-md-6 col-lg-4">
+            <a class="app-menu__item rounded"
+                href="?c=producto"
+                data-toggle="treeview">
                 <i class="app-menu__icon bi bi-cake"></i>
                 <span class="app-menu__label">Postres</span>
                 <i class="treeview-indicator bi bi-chevron-right"></i>
             </a>
         </li>
-        <li class="col-4 mx-auto rounded">
-            <a class="app-menu__item"
-               href="?c=venta"
-               data-toggle="treeview">
+
+        <li class="col-12 col-md-6 col-lg-4">
+            <a class="app-menu__item rounded"
+                href="?c=venta"
+                data-toggle="treeview">
                 <i class="app-menu__icon bi bi-receipt"></i>
                 <span class="app-menu__label">Ventas</span>
                 <i class="treeview-indicator bi bi-chevron-right"></i>
@@ -478,4 +472,10 @@ body {
         </li>
     </ul>
 
+    <div class="p-1 text-light">
+        <p class="text-end">
+            <?= $_SESSION['nombre_dia'] ?>
+            <?= $_SESSION['dia'] ?>/<?= $_SESSION['mes'] ?>/<?= $_SESSION['año'] ?>
+        </p>
+    </div>
 </div>

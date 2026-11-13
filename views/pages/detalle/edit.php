@@ -19,7 +19,7 @@ require_once __DIR__ . "/../venta/descuento.php";
                 <label class="form-label"><h3>Postre</h3></label>
                 <select class="form-select mb-2" name="producto_id" id="">
                   <?php foreach($this->productos->Disponibles() as $producto): ?>
-                  <option value="<?= $producto->id ?>"><?= $producto->nombre ?> -$<?= $producto->precio ?></option>
+                  <option value="<?= $producto->id ?>"><?= $producto->nombre ?> --- $<?= $producto->precio ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -32,10 +32,10 @@ require_once __DIR__ . "/../venta/descuento.php";
 
             <div class="card-footer">
               <button class="btn btn-primary m-2 p-2" type="submit">
-                <i class="bi bi-check-circle-fill me-2"></i>Registrar
+                <i class="bi bi-plus-circle-fill me-2"></i>Agregar
               </button>
               <a class="btn btn-success m-2 p-2" href="?c=venta#venta-<?=$d->get_id()?>">
-                <i class="bi bi-check-circle-fill me-2"></i>Terminado/Regresar
+                <i class="bi bi-check-circle me-2"></i>Terminado/Regresar
               </a>
               </div>
           </form>

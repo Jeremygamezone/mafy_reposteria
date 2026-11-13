@@ -1,6 +1,15 @@
 <?php
-
+session_start();
 require_once '../app/models/database.php';
+require_once '../views/pages/venta/descuento.php';
+$descuento = new Descuento();
+$fechaDeHoy = $descuento->ObtenerFecha();
+$_SESSION['nombre_dia'] = $fechaDeHoy['nombre_dia'];
+$_SESSION['dia'] = $fechaDeHoy['dia'];
+$_SESSION['mes'] = $fechaDeHoy['mes'];
+$_SESSION['año'] = $fechaDeHoy['año'];
+$_SESSION['inicio_semana'] = $fechaDeHoy['inicio_semana'];
+$_SESSION['fin_semana'] = $fechaDeHoy['fin_semana'];
 
 if(!isset($_GET['c'])){
     require_once '../app/controllers/inicio.controlador.php';

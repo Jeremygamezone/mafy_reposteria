@@ -20,11 +20,11 @@
             </div>
 
             <div class="tile-footer">
-              <button class="btn btn-primary" type="submit">
-                <i class="bi bi-check-circle-fill me-2"></i>Registrar
+              <button class="btn btn-primary m-2" type="submit">
+                <i class="bi bi-check-circle-fill me-2"></i> Registrar 
               </button>&nbsp;&nbsp;&nbsp;
-              <a class="btn btn-secondary" href="?c=venta">
-                <i class="bi bi-x-circle-fill me-2"></i>Cancelar venta
+              <a class="btn btn-secondary m-2" href="?c=producto">
+                <i class="bi bi-x-circle-fill me-2"></i> Cancelar
               </a>
             </div>
 

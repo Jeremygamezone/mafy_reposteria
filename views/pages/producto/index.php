@@ -8,16 +8,14 @@
             </div>
         </div>
           <div class="tile">
-            <h1><a href="?c=producto&a=FormCrear" class="btn btn-primary btn-flat">Nuevo Postre</a></h1>
+            <h1><a href="?c=producto&a=FormCrear" class="btn btn-primary btn-flat"><i class="bi bi-plus-circle"> Nuevo Postre</i></a></h1>
             <div class="tile-body">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
-                      <th>ID de producto</th>
                       <th>Postre</th>
                       <th>Precio</th>
-                      <th>Descripción</th>
                       <th>Estatus</th>
                       <th>Accion</th>
                     </tr>
@@ -25,10 +23,8 @@
                   <tbody>
                     <?php foreach($this->model->Listar() as $r):?>
                     <tr>
-                      <td><?=$r->id?></td>
                       <td><?=$r->nombre?></td>
                       <td>$ <?=$r->precio?></td>
-                      <td><?=$r->descripcion?></td>
                       <td><?=$r->estatus?></td>
                       <td><a href="?c=producto&a=FormEditar&id=<?=$r->id?>" class="btn btn-flat bg-pink-dark">Editar</a></td>
                     </tr>

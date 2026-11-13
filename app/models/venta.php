@@ -1,6 +1,7 @@
 <?php
 
-class Venta{
+class Venta
+{
     private $pdo;
 
     private $id;
@@ -10,83 +11,99 @@ class Venta{
     private $nota;
     private $estatus;
 
-    public function __CONSTRUCT(){
+    public function __CONSTRUCT()
+    {
         $this->pdo = DataBase::Connect();
     }
 
-    public function get_id():int{
+    public function get_id(): int
+    {
         return $this->id;
     }
 
-    public function set_id(int $id){
+    public function set_id(int $id)
+    {
         $this->id = $id;
     }
 
-    public function get_usuario_id():int{
+    public function get_usuario_id(): int
+    {
         return $this->usuario_id;
     }
 
-    public function set_usuario_id(int $usuario_id){
+    public function set_usuario_id(int $usuario_id)
+    {
         $this->usuario_id = $usuario_id;
     }
 
-    public function get_fecha():string{
+    public function get_fecha(): string
+    {
         return $this->fecha;
     }
 
-    public function set_fecha(string $fecha){
+    public function set_fecha(string $fecha)
+    {
         $this->fecha = $fecha;
     }
 
-    public function get_cliente():string{
+    public function get_cliente(): string
+    {
         return $this->cliente;
     }
 
-    public function set_cliente(string $cliente){
+    public function set_cliente(string $cliente)
+    {
         $this->cliente = $cliente;
     }
 
-    public function get_nota():string{
+    public function get_nota(): string
+    {
         return $this->nota;
     }
 
-    public function set_nota(string $nota){
+    public function set_nota(string $nota)
+    {
         $this->nota = $nota;
     }
 
-    public function get_estatus():string{
+    public function get_estatus(): string
+    {
         return $this->estatus;
     }
 
-    public function set_estatus(string $estatus){
+    public function set_estatus(string $estatus)
+    {
         $this->estatus = $estatus;
     }
 
 
 
-    public function Listar(){
-        try{
-            $consulta=$this->pdo->prepare("SELECT * FROM ventas ORDER BY id DESC");
+    public function Listar()
+    {
+        try {
+            $consulta = $this->pdo->prepare("SELECT * FROM ventas ORDER BY id DESC");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function ListarPagados($inicioSemana,$finSemana){
-        try{
-            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE (estatus = 'Pagado') AND (date(fecha) BETWEEN ? and ?) ORDER BY id DESC");
-            $consulta->execute(array(($inicioSemana),($finSemana)));
+    public function ListarPagados($inicioSemana, $finSemana)
+    {
+        try {
+            $consulta = $this->pdo->prepare("SELECT * FROM ventas WHERE (estatus = 'Pagado') AND (date(fecha) BETWEEN ? and ?) ORDER BY id DESC");
+            $consulta->execute(array(($inicioSemana), ($finSemana)));
             return $consulta->fetchAll(PDO::FETCH_OBJ);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function ListarPendientes(){
-        try{
-            $consulta=$this->pdo->prepare("SELECT
+    public function ListarPendientes()
+    {
+        try {
+            $consulta = $this->pdo->prepare("SELECT
                 v.id AS venta_id,
                 v.usuario_id,
                 CONCAT(
@@ -104,28 +121,30 @@ class Venta{
             ORDER BY v.id DESC");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function ListarCancelados(){
-        try{
-            $consulta=$this->pdo->prepare("SELECT * FROM ventas WHERE estatus = 'Cancelado'");
+    public function ListarCancelados()
+    {
+        try {
+            $consulta = $this->pdo->prepare("SELECT * FROM ventas WHERE estatus = 'Cancelado'");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function DetallesVenta($venta_id){
-        try{
-            $consulta=$this->pdo->prepare("SELECT * FROM detalles WHERE venta_id = :venta_id");
+    public function DetallesVenta($venta_id)
+    {
+        try {
+            $consulta = $this->pdo->prepare("SELECT * FROM detalles WHERE venta_id = :venta_id");
             $consulta->bindParam(':venta_id', $venta_id, PDO::PARAM_INT);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
@@ -178,7 +197,7 @@ class Venta{
             ORDER BY v.id DESC
         ");
 
-        $consulta->execute(array(($_GET['isemana']),($_GET['fsemana'])));
+        $consulta->execute(array(($_SESSION['inicio_semana']), ($_SESSION['inicio_semana'])));
 
         return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
@@ -206,12 +225,69 @@ class Venta{
             ORDER BY v.id DESC
         ");
 
-        $consulta->execute(array(($_GET['isemana']),($_GET['fsemana'])));
+        $consulta->execute(array(($_SESSION['inicio_semana']), ($_SESSION['fin_semana'])));
 
         return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function Obtener($id){
+    public function ListarSemanaPagados()
+    {
+        $consulta = $this->pdo->prepare("
+            SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota,
+                v.estatus
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            WHERE (date(v.fecha) between ? and ?)
+            AND estatus = 'Pagado'
+            ORDER BY v.id DESC
+        ");
+
+        $consulta->execute(array(($_SESSION['inicio_semana']), ($_SESSION['fin_semana'])));
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function ListarSemanaCancelados()
+    {
+        $consulta = $this->pdo->prepare("
+            SELECT
+                v.id AS venta_id,
+                v.usuario_id,
+                CONCAT(
+                    u.nombre,
+                    ' ',
+                    u.apellido_paterno
+                ) AS nombre_usuario,
+                v.fecha,
+                v.cliente,
+                v.nota,
+                v.estatus
+            FROM ventas v
+            INNER JOIN usuarios u
+                ON v.usuario_id = u.id
+            WHERE (date(v.fecha) between ? and ?)
+            AND estatus = 'Cancelado'
+            ORDER BY v.id DESC
+        ");
+
+        $consulta->execute(array(($_SESSION['inicio_semana']), ($_SESSION['fin_semana'])));
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function Obtener($id)
+    {
         try {
             $consulta = $this->pdo->prepare(
                 "SELECT * FROM ventas WHERE id = ?"
@@ -236,22 +312,24 @@ class Venta{
             die($e->getMessage());
         }
     }
-    
-    public function Insertar(Venta $v){
-        try{
-            $consulta="INSERT INTO ventas(usuario_id, fecha, cliente, nota, estatus) VALUES (1,?,?,?,'Pendiente')";
-            $this->pdo->prepare($consulta)->execute(array($v->get_fecha(),$v->get_cliente(),$v->get_nota()));
+
+    public function Insertar(Venta $v)
+    {
+        try {
+            $consulta = "INSERT INTO ventas(usuario_id, fecha, cliente, nota, estatus) VALUES (1,?,?,?,'Pendiente')";
+            $this->pdo->prepare($consulta)->execute(array($v->get_fecha(), $v->get_cliente(), $v->get_nota()));
 
             $id_venta = $this->pdo->lastInsertId();
 
             header("Location: ?c=detalle&a=FormEditar&id=" . $id_venta);
             exit;
-        }catch(Exception $e){
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    public function Actualizar(Venta $v){
+    public function Actualizar(Venta $v)
+    {
         try {
             $consulta = "UPDATE ventas
                         SET cliente = ?, nota = ?, estatus = ?
@@ -263,10 +341,8 @@ class Venta{
                 $v->get_estatus(),
                 $v->get_id()
             ]);
-
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 }
-?>

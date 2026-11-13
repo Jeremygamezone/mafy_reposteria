@@ -39,10 +39,10 @@
             </div>
 
             <div class="tile-footer">
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-primary m-2" type="submit">
                 <i class="bi bi-check-circle-fill me-2"></i>Guardar cambios
               </button>&nbsp;&nbsp;&nbsp;
-              <a class="btn btn-secondary" href="?c=producto">
+              <a class="btn btn-secondary m-2" href="?c=producto">
                 <i class="bi bi-x-circle-fill me-2"></i>Regresar
               </a>
             </div>
