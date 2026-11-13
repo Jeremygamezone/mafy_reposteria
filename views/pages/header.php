@@ -124,6 +124,20 @@ $fechaDeHoy = $descuento->ObtenerFecha();
         min-height: 100vh;
     }
 
+    .bg-image-04 {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.55),
+                rgba(0, 0, 0, 0.55)),
+            url('http://localhost/mafy_reposteria/public/images/land.png');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
     .bg-image-sales {
         background-image:
             linear-gradient(rgba(0, 0, 0, 0.55),
@@ -439,6 +453,9 @@ $fechaDeHoy = $descuento->ObtenerFecha();
     }
 </style>
 
+<?php 
+if (isset($_SESSION["active"])):
+?>
 <div class="sidebar col-12 col-lg-10 mx-auto pt-1 m-0 p-2 pt-5">
     <ul class="row list-unstyled g-2">
         <li class="col-12 col-md-6 col-lg-4">
@@ -479,3 +496,7 @@ $fechaDeHoy = $descuento->ObtenerFecha();
         </p>
     </div>
 </div>
+
+<?php 
+endif;
+?>

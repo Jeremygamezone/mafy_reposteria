@@ -1,6 +1,7 @@
 <?php
 class Usuario
 {
+    private $credenciales = [];
     private $pdo;
 
     public function __CONSTRUCT()
@@ -10,19 +11,8 @@ class Usuario
 
     public function Comprobar($usuario)
     {
-        try {
-
-            $consulta = $this->pdo->prepare(
-                "SELECT * FROM usuarios
-                    WHERE usuario = 1"
-            );
-
-            $consulta->execute([$usuario]);
-
-            return $consulta->fetch(PDO::FETCH_OBJ);
-        } catch (PDOException $e) {
-
-            die($e->getMessage());
-        }
+        if ($usuario == "Mafy.postres"):
+            return $usuario;
+        endif;
     }
 }

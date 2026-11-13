@@ -1,23 +1,30 @@
-<?php 
-    require_once 'app/models/usuario.php';
+<?php
+require_once '../app/models/usuario.php';
 
-    class UsuarioControlador{
-        private $usuario;
+class UsuarioControlador
+{
+    private $usuario;
 
-        public function __construct()
-        {
-            $this->usuario = new Usuario();
-        }
+    public function __construct()
+    {
+        $this->usuario = new Usuario();
+    }
 
-        
+    public function Inicio()
+    {
+        require_once '../views/pages/header.php';
+        require_once '../views/pages/login/index.php';
+        require_once '../views/pages/footer.php';
+    }
+
     public function Login()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ?c=usuario&a=Index');
+            header("Location: ?c=venta");
             exit;
         }
 
-        $usuario = trim($_POST['usuario'] ?? '');
+        $usuario = trim($_POST['user'] ?? '');
         $password = $_POST['password'] ?? '';
 
         $datosUsuario = $this->usuario->Comprobar($usuario);
@@ -31,16 +38,13 @@
 
             $_SESSION['usuario_id'] = $datosUsuario->id;
             $_SESSION['usuario'] = $datosUsuario->usuario;
-            $_SESSION['nombre'] = $datosUsuario->nombre;
-            $_SESSION['rol'] = $datosUsuario->rol;
 
-            header('Location: ?c=venta&a=Index');
+            header('Location: ?c=usuario$SUCCESS');
             exit;
         } else {
 
-            header('Location: ?c=usuario&a=Index&error=1');
+            header('Location: ?c=usuario&ERROR');
             exit;
         }
     }
-    }
-?>
+}
