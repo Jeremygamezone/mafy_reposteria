@@ -24,27 +24,21 @@ class UsuarioControlador
             exit;
         }
 
-        $usuario = trim($_POST['user'] ?? '');
-        $password = $_POST['password'] ?? '';
-
-        $datosUsuario = $this->usuario->Comprobar($usuario);
-
-        if (
-            $datosUsuario &&
-            password_verify($password, $datosUsuario->password)
-        ) {
-
+        if ($_POST['user'] == "Mafy.postres" && $_POST['password'] == "231145_ mlfg") {
             session_regenerate_id(true);
+            $_SESSION['active'] = true;
 
-            $_SESSION['usuario_id'] = $datosUsuario->id;
-            $_SESSION['usuario'] = $datosUsuario->usuario;
-
-            header('Location: ?c=usuario$SUCCESS');
+            header('Location: ?c=inicio');
             exit;
         } else {
 
             header('Location: ?c=usuario&ERROR');
-            exit;
+            exit("Usuario/Contraseña incorrecta");
         }
+    }
+
+    public function Cerrar(){
+        session_destroy();
+        header('Location: ?c=usuario&Exited');
     }
 }

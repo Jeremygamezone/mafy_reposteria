@@ -11,7 +11,7 @@ class Descuento {
 
         if (
             in_array((int)$id_producto, [1, 2, 3, 4])
-            && $cantidadTotalElegible >= 2
+            && $cantidadTotalElegible >= 3
         ) {
             return [
                 'clase' => "text-blue",

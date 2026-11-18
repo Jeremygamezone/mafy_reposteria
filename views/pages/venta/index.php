@@ -230,7 +230,6 @@
         <br>
         <div class="row" id="ParteInferior">
             <div class="col-12 mb-4" id="TodasLasVentas">
-
                 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 m-4">
                     <h2><i class="bi bi-receipt"></i> Consultar detalles</h2>
                 </div>

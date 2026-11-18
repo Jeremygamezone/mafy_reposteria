@@ -359,7 +359,7 @@ $fechaDeHoy = $descuento->ObtenerFecha();
         color: var(--bs-yellow-light) !important;
     }
 
-    .text-green-light{
+    .text-green-light {
         color: var(--bs-green-light) !important;
     }
 
@@ -453,50 +453,59 @@ $fechaDeHoy = $descuento->ObtenerFecha();
     }
 </style>
 
-<?php 
+<?php
 if (isset($_SESSION["active"])):
 ?>
-<div class="sidebar col-12 col-lg-10 mx-auto pt-1 m-0 p-2 pt-5">
-    <ul class="row list-unstyled g-2">
-        <li class="col-12 col-md-6 col-lg-4">
-            <a class="app-menu__item rounded"
-                href="index.php"
-                data-toggle="treeview">
-                <i class="app-menu__icon bi bi-house-heart"></i>
-                <span class="app-menu__label">Inicio</span>
-                <i class="treeview-indicator bi bi-chevron-right"></i>
-            </a>
-        </li>
+    <div class="sidebar col-12 col-lg-10 mx-auto pt-1 m-0 p-2 pt-5">
+        <ul class="row list-unstyled g-2">
+            <li class="col-12 col-md-6 col-lg-4">
+                <a class="app-menu__item rounded"
+                    href="index.php"
+                    data-toggle="treeview">
+                    <i class="app-menu__icon bi bi-house-heart"></i>
+                    <span class="app-menu__label">Inicio</span>
+                    <i class="treeview-indicator bi bi-chevron-right"></i>
+                </a>
+            </li>
 
-        <li class="col-12 col-md-6 col-lg-4">
-            <a class="app-menu__item rounded"
-                href="?c=producto"
-                data-toggle="treeview">
-                <i class="app-menu__icon bi bi-cake"></i>
-                <span class="app-menu__label">Postres</span>
-                <i class="treeview-indicator bi bi-chevron-right"></i>
-            </a>
-        </li>
+            <li class="col-12 col-md-6 col-lg-4">
+                <a class="app-menu__item rounded"
+                    href="?c=producto"
+                    data-toggle="treeview">
+                    <i class="app-menu__icon bi bi-cake"></i>
+                    <span class="app-menu__label">Postres</span>
+                    <i class="treeview-indicator bi bi-chevron-right"></i>
+                </a>
+            </li>
 
-        <li class="col-12 col-md-6 col-lg-4">
-            <a class="app-menu__item rounded"
-                href="?c=venta"
-                data-toggle="treeview">
-                <i class="app-menu__icon bi bi-receipt"></i>
-                <span class="app-menu__label">Ventas</span>
-                <i class="treeview-indicator bi bi-chevron-right"></i>
-            </a>
-        </li>
-    </ul>
+            <li class="col-12 col-md-6 col-lg-4">
+                <a class="app-menu__item rounded"
+                    href="?c=venta"
+                    data-toggle="treeview">
+                    <i class="app-menu__icon bi bi-receipt"></i>
+                    <span class="app-menu__label">Ventas</span>
+                    <i class="treeview-indicator bi bi-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
 
-    <div class="p-1 text-light">
-        <p class="text-end">
-            <?= $_SESSION['nombre_dia'] ?>
-            <?= $_SESSION['dia'] ?>/<?= $_SESSION['mes'] ?>/<?= $_SESSION['año'] ?>
-        </p>
+        <div class="p-1 text-light">
+            <div class="d-flex justify-content-between gap-2 mb-1">
+                <span class="mx-2">
+                    <p>
+                        <?= $_SESSION['nombre_dia'] ?>
+                        <?= $_SESSION['dia'] ?>/<?= $_SESSION['mes'] ?>/<?= $_SESSION['año'] ?>
+                    </p>
+                </span>
+                <span class="mx-2">
+                    <a class="btn btn-secondary btn-sm mx-auto" href="?c=usuario&a=cerrar">
+                        <i class="bi bi-door-closed"></i>Cerrar sesión
+                    </a>
+                </span>
+            </div>
+        </div>
     </div>
-</div>
 
-<?php 
+<?php
 endif;
 ?>

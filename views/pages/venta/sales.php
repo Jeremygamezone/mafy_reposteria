@@ -41,7 +41,7 @@ endswitch;
                     
                     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 m-4">
                         <h2><i class="bi bi-receipt"></i> <?= $funcionTexto ?></h2>
-                        <h3>Periodo:
+                        <h3>Periodo
                             <?= $_SESSION['inicio_semana'] ?>
                             /
                             <?= $_SESSION['fin_semana'] ?></h3>
